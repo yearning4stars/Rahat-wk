@@ -2404,13 +2404,11 @@ const submitAuth = async () => {
   if (!email || !pwd) { showWarn(authWarn, TEXT.errAuthWrong, true); return; }
   showWarn(authWarn, TEXT.msgSaving);
   try {
-    const cred = await signInWithEmailAndPassword(auth, email, pwd);
-    const adminDoc = await getDoc(doc(db, "admins", cred.user.uid));
-    if (!adminDoc.exists()) {
-      await signOut(auth);
-      showWarn(authWarn, TEXT.errAuthNotAdmin, true);
-      return;
-    }
+const cred = await signInWithEmailAndPassword(auth, email, pwd);
+_adminUser = cred.user;
+authModal.classList.add('hidden');
+authPwd.value = '';
+setScreen('admin');
     _adminUser = cred.user;
     authModal.classList.add('hidden');
     authPwd.value = '';
