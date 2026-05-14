@@ -3,26 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Match System</title>
+<title>Rahat Match</title>
 
-<style>
-/* (CSS เดิมของคุณใช้ได้เหมือนเดิม ไม่ต้องแก้) */
-</style>
+<!-- CSS เดิมของคุณ (ไม่แตะ) -->
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ================= UI ของคุณทั้งหมดเหมือนเดิม ================= -->
-<!-- (home / register / edit / reveal / admin / modals) -->
+<!-- UI เดิมของคุณทั้งหมด (ไม่แตะ) -->
+<!-- home / register / edit / reveal / admin / modals -->
 
 <script type="module">
 
-/* ================= FIREBASE (เหมือนเดิม) ================= */
-// import { getDoc, setDoc, doc, onSnapshot, signInWithEmailAndPassword, signOut } from "firebase/..."
+/* ================= FIREBASE (ของเดิมห้ามลบ) ================= */
+// import { ... } from "firebase/..."
 // const db = ...
 // const auth = ...
 
-/* ================= DATA SYNC (เหมือนเดิม) ================= */
+/* ================= DATA SYNC (ของเดิม) ================= */
 
 try {
   const snap = await getDoc(docRef);
@@ -42,58 +41,43 @@ onSnapshot(docRef, (snap) => {
   }
 });
 
-/* ================= ADMIN BYPASS (แก้ตรงนี้สำคัญ) ================= */
+/* ================= 🔓 ADMIN PATCH (แก้แค่ตรงนี้) ================= */
 
-// ❌ เดิมมี auth check → ตอนนี้ลบความจำเป็นออก
+// ❗ ทำให้เข้า admin ได้ทุกคน
 const isAdminAuthed = () => true;
 
 const tryEnterAdmin = () => {
-  // 🔥 เข้า admin ได้ทุกคน
-  setScreen('admin');
+  setScreen('admin'); // 🔥 bypass login
 };
 
+// ❗ bypass Firebase auth
 const submitAuth = async () => {
-  // 🔥 bypass firebase admin login
-  _adminUser = { uid: "bypass" };
+  _adminUser = { uid: "local" };
   authModal.classList.add('hidden');
   setScreen('admin');
 };
 
-$('admin-signout').addEventListener('click', async () => {
-  try { await signOut(auth); } catch {}
-  setScreen('home');
-});
+/* ================= เอฟเฟกต์เดิม (ไม่ลบ แต่ปิดเบา ๆ ถ้ามีปัญหา) ================= */
 
-/* ================= EFFECTS REMOVED ================= */
+window.confetti = window.confetti || (() => {});
 
-// ❌ confetti disabled
-const confetti = () => {};
-
-// ❌ scan effect simplified
-const runScan = () => {
-  revealStage.classList.add('done');
-  revealHint.textContent = TEXT.revealScanned || '';
-};
-
-/* ================= KEEP EVERYTHING ELSE ORIGINAL ================= */
-
-// ---- ALL YOUR ORIGINAL CODE BELOW (unchanged) ----
-// onDataChanged()
-// helpers
-// home logic
-// register
-// edit
-// hints
-// reveal
-// admin render
-// randomize
-// modals
-// etc.
-
-/* ================= OPTIONAL SAFETY PATCH ================= */
-
-// กัน crash ถ้ามี confetti เรียกอยู่ที่อื่น
-window.confetti = () => {};
+/* ================= โค้ดเดิมทั้งหมดของคุณ ================= */
+// 👇👇👇
+/*
+    ทุก function เดิมของคุณ:
+    - onDataChanged
+    - helpers (shuffle, findUser...)
+    - home system
+    - register system
+    - edit system
+    - reveal system
+    - hints system
+    - admin render
+    - randomize
+    - modals
+    - etc
+*/
+// 👆👆👆
 
 </script>
 
