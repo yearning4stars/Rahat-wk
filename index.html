@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -2404,7 +2405,12 @@ const submitAuth = async () => {
   showWarn(authWarn, TEXT.msgSaving);
   try {
     const cred = await signInWithEmailAndPassword(auth, email, pwd);
-  
+    const adminDoc = await getDoc(doc(db, "admins", cred.user.uid));
+    if (!adminDoc.exists()) {
+      await signOut(auth);
+      showWarn(authWarn, TEXT.errAuthNotAdmin, true);
+      return;
+    }
     _adminUser = cred.user;
     authModal.classList.add('hidden');
     authPwd.value = '';
