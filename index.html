@@ -2390,12 +2390,7 @@ const authCancel = $('auth-cancel');
 const authWarn = $('auth-warn');
 
 const tryEnterAdmin = () => {
-  if (isAdminAuthed()) { setScreen('admin'); return; }
-  showWarn(authWarn, '');
-  authEmail.value = '';
-  authPwd.value = '';
-  authModal.classList.remove('hidden');
-  setTimeout(() => authEmail.focus(), 80);
+  setScreen('admin');
 };
 
 const submitAuth = async () => {
