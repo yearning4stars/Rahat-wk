@@ -1,0 +1,2689 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="จับคู่พี่รหัส × น้องรหัส — Sci-Math WK 2569">
+<meta property="og:title" content="จับคู่พี่รหัส × น้องรหัส">
+<meta property="og:description" content="ะสุ่มจับคู่พี่รหัส–น้องรหัส Sci-Math WK 2569">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<title data-text="pageTitle">จับคู่พี่รหัส × น้องรหัส</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@500;700&family=Sarabun:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#070d18;--bg-1:#0e1a2f;--bg-2:#172a48;--line:#243a5e;--gold:#c9a961;--gold-bright:#e6c97a;--rose:#d97f9c;--rose-soft:rgba(217,127,156,.55);--text:#e8eef5;--muted:#8b9bb0;--danger:#c0382b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{min-height:100vh;min-height:100dvh}
+  body{font-family:'Sarabun',sans-serif;color:var(--text);background:var(--bg);overflow-x:hidden;display:flex;flex-direction:column}
+
+  #bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;contain:layout paint size;background:radial-gradient(1600px 1100px at 20% 0%,#1a2c4a 0%,transparent 55%),radial-gradient(1400px 900px at 88% 100%,#11203b 0%,transparent 65%),radial-gradient(900px 700px at 60% 40%,#1c2754 0%,transparent 70%),radial-gradient(circle at 70% 90%,#0a1228 0%,#020510 95%),#020510}
+  .nebula{position:absolute;width:60vw;height:60vw;max-width:1000px;max-height:1000px;border-radius:50%;filter:blur(50px);opacity:.55;mix-blend-mode:screen;animation:nebula-float 32s ease-in-out infinite alternate;contain:layout paint;will-change:transform}
+  .nebula.purple,.nebula.pink{display:none}
+  .nebula.gold{background:radial-gradient(circle,rgba(220,180,110,.78) 0%,transparent 60%);top:-12%;left:-12%;animation-duration:28s}
+  .nebula.cyan{background:radial-gradient(circle,rgba(80,160,235,.7) 0%,transparent 65%);bottom:-15%;right:-10%;animation-duration:42s;animation-delay:-18s}
+  .nebula.rose{position:absolute;width:48vw;height:48vw;max-width:820px;max-height:820px;background:radial-gradient(circle,rgba(217,127,156,.55) 0%,transparent 60%);top:55%;left:35%;border-radius:50%;filter:blur(64px);opacity:.32;mix-blend-mode:screen;animation:nebula-float 38s ease-in-out infinite alternate;animation-delay:-22s;contain:layout paint;will-change:transform}
+  @keyframes nebula-float{0%{transform:translate(0,0) scale(1) rotate(0deg);opacity:.32}50%{transform:translate(5%,-4%) scale(1.15) rotate(8deg);opacity:.5}100%{transform:translate(-4%,5%) scale(1.06) rotate(-7deg);opacity:.36}}
+  .starfield{position:absolute;inset:-25%;width:150%;height:150%;transform-origin:50% 50%;contain:layout paint;will-change:transform}
+  .starfield.far{animation:spin-cw 720s linear infinite}
+  .starfield.mid{animation:spin-ccw 460s linear infinite}
+  .starfield.near{animation:spin-cw 280s linear infinite}
+  @keyframes spin-cw{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  @keyframes spin-ccw{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+  .star{position:absolute;background:#fff;border-radius:50%;width:var(--s,2px);height:var(--s,2px);opacity:var(--o,.85);animation:twinkle var(--t,4s) ease-in-out infinite;animation-delay:var(--d,0s);box-shadow:0 0 var(--g,8px) rgba(255,255,255,.85)}
+  .star.blue{background:#cfe1ff;box-shadow:0 0 var(--g,10px) rgba(184,212,255,.9)}
+  .star.gold{background:var(--gold-bright);box-shadow:0 0 var(--g,10px) rgba(230,201,122,.9)}
+  .star.red{background:#ffb47a;box-shadow:0 0 var(--g,10px) rgba(255,180,122,.85)}
+  .star.pulse{animation:pulse var(--t,3s) ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:var(--o,.85);transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+  @keyframes pulse{0%,100%{opacity:var(--o,.75);transform:scale(1)}50%{opacity:1;transform:scale(1.9)}}
+  .star.bright::before,.star.bright::after{content:'';position:absolute;background:rgba(255,255,255,.75);border-radius:1px;pointer-events:none}
+  .star.bright::before{width:280%;height:1px;left:-90%;top:50%;transform:translateY(-50%);box-shadow:0 0 4px rgba(255,255,255,.6)}
+  .star.bright::after{width:1px;height:280%;top:-90%;left:50%;transform:translateX(-50%);box-shadow:0 0 4px rgba(255,255,255,.6)}
+  .dust{position:absolute;width:1.5px;height:1.5px;background:rgba(255,255,255,.7);border-radius:50%;pointer-events:none;animation:dust-drift var(--t,40s) linear infinite;animation-delay:var(--d,0s);box-shadow:0 0 3px rgba(255,255,255,.4)}
+  @keyframes dust-drift{0%{transform:translate(0,0);opacity:0}10%{opacity:.7}90%{opacity:.7}100%{transform:translate(var(--dx,-200px),var(--dy,80px));opacity:0}}
+  .shooting-star{position:absolute;width:140px;height:1px;background:linear-gradient(to left,transparent,rgba(255,255,255,1),rgba(230,201,122,.7),transparent);border-radius:1px;pointer-events:none;transform-origin:left center;box-shadow:0 0 6px rgba(255,236,180,.6);animation:shoot 1.6s cubic-bezier(.55,.1,.85,.4) forwards}
+  @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(-22deg) scaleX(.2)}10%{opacity:1}100%{opacity:0;transform:translate(-360px,160px) rotate(-22deg) scaleX(1)}}
+  .comet{position:absolute;width:280px;height:2px;background:linear-gradient(to left,transparent 0%,rgba(255,255,255,1) 20%,rgba(230,201,122,.85) 50%,rgba(140,180,240,.5) 80%,transparent 100%);border-radius:2px;pointer-events:none;transform-origin:left center;box-shadow:0 0 10px rgba(255,236,180,.8),0 0 22px rgba(201,169,97,.4);animation:comet 3.2s cubic-bezier(.45,.1,.7,.35) forwards}
+  @keyframes comet{0%{opacity:0;transform:translate(0,0) rotate(-20deg) scaleX(.15)}8%{opacity:1}100%{opacity:0;transform:translate(-820px,300px) rotate(-20deg) scaleX(1)}}
+
+  .app{max-width:1040px;margin:0 auto;width:100%;padding:28px 16px 96px;flex:1;display:flex;flex-direction:column;position:relative}
+  header.site{text-align:center;margin-bottom:24px;width:100%}
+  header.site h1{font-family:'Mali',cursive;font-size:clamp(2rem,5vw,3.2rem);color:var(--gold);line-height:1.1;text-shadow:0 2px 16px rgba(201,169,97,.35);letter-spacing:.5px}
+  header.site .subtitle{color:var(--muted);margin-top:8px;font-size:1rem;letter-spacing:1px}
+  .hero{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:32px 0;animation:rise .6s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .panel{background:linear-gradient(180deg,var(--bg-1) 0%,#0b1424 100%);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 28px rgba(0,0,0,.45);animation:rise .5s ease both;width:100%}
+  .glass-panel{background:rgba(14,26,47,.55);-webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%);border:1px solid rgba(201,169,97,.25);border-radius:24px;padding:30px 26px 26px;box-shadow:0 28px 60px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.04);width:100%;max-width:560px;animation:rise .5s ease both}
+
+  .input-group{margin-bottom:14px}
+  .input-group label{display:block;font-weight:700;margin-bottom:6px;color:var(--gold);font-size:.95rem;letter-spacing:.5px}
+  input[type="text"],input[type="password"],input[type="url"],textarea{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:12px;font-family:inherit;font-size:1rem;background:rgba(10,19,34,.7);color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s}
+  input[type="text"],input[type="url"]{font-size:1.1rem;font-family:'Mali',cursive}
+  input[type="password"]{font-family:monospace;font-size:.95rem}
+  input[type="text"][readonly],input[type="url"][readonly]{background:rgba(10,19,34,.4);color:var(--gold-bright);cursor:default}
+  textarea{min-height:130px;resize:vertical}
+  input[type="text"]::placeholder,input[type="password"]::placeholder,input[type="url"]::placeholder,textarea::placeholder{color:#4a5a73}
+  input[type="text"]:focus,input[type="password"]:focus,input[type="url"]:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,97,.18)}
+
+  .role-picker{display:flex;gap:10px;margin-bottom:6px}
+  .role-picker label{flex:1;cursor:pointer}
+  .role-picker input{display:none}
+  .role-picker input:checked + .role-card{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,169,97,.18),rgba(201,169,97,.05));box-shadow:0 0 0 2px rgba(201,169,97,.4)}
+  .role-card{display:block;padding:14px 12px;border:1px solid var(--line);border-radius:14px;text-align:center;font-family:'Mali',cursive;font-size:1.1rem;background:rgba(10,19,34,.5);transition:border-color .15s,background .15s,box-shadow .15s,transform .15s}
+  .role-card:hover{border-color:rgba(201,169,97,.5);transform:translateY(-2px)}
+  .role-card .icon{font-size:1.6rem;display:block;margin-bottom:4px}
+
+  .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+  button{font-family:'Mali',cursive;font-size:1.05rem;padding:11px 26px;border:1px solid var(--gold);border-radius:999px;background:linear-gradient(135deg,var(--gold) 0%,#a88947 100%);color:#1a1208;cursor:pointer;box-shadow:0 4px 14px rgba(201,169,97,.28);transition:transform .15s,box-shadow .15s,opacity .15s;font-weight:700;letter-spacing:.3px}
+  button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 22px rgba(201,169,97,.45)}
+  button:active:not(:disabled){transform:translateY(0)}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  button.cta{font-size:1.2rem;padding:14px 36px}
+  button.ghost{background:transparent;color:var(--gold);border-color:var(--line);box-shadow:none}
+  button.ghost:hover:not(:disabled){border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,97,.1)}
+  button.danger{background:transparent;color:#ffb4ad;border-color:#5a2c2c}
+  button.danger:hover:not(:disabled){background:rgba(231,76,60,.08);border-color:var(--danger)}
+
+  .warning{text-align:center;background:rgba(201,169,97,.08);border:1px solid rgba(201,169,97,.3);color:var(--gold-bright);padding:10px 14px;border-radius:12px;margin:14px 0 0;font-size:.95rem}
+  .warning.error{background:rgba(231,76,60,.1);border-color:rgba(231,76,60,.4);color:#ffb4ad}
+
+  .pin-stage-label{text-align:center;color:var(--gold-bright);font-family:'Mali',cursive;font-size:1.1rem;margin:6px 0 14px;letter-spacing:.5px}
+  .pin-display{display:flex;justify-content:center;gap:14px;margin:8px 0 22px}
+  .pin-display.compact{gap:11px;margin:6px 0 16px}
+  .pin-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);background:transparent;transition:all .2s}
+  .pin-display.compact .pin-dot{width:14px;height:14px;border-width:2px}
+  .pin-dot.filled{background:var(--gold);border-color:var(--gold);box-shadow:0 0 12px rgba(201,169,97,.55);transform:scale(1.05)}
+  .pin-dot.just-filled{animation:pin-pop .35s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes pin-pop{0%{transform:scale(.6);box-shadow:0 0 0 rgba(201,169,97,0)}55%{transform:scale(1.35);box-shadow:0 0 24px rgba(230,201,122,.9)}100%{transform:scale(1.05);box-shadow:0 0 12px rgba(201,169,97,.55)}}
+  .pin-display.complete .pin-dot.filled{animation:pin-glow 1.6s ease-in-out infinite}
+  @keyframes pin-glow{0%,100%{box-shadow:0 0 12px rgba(201,169,97,.55)}50%{box-shadow:0 0 22px rgba(230,201,122,.85)}}
+  .pin-dot.shake{animation:pin-shake .4s ease}
+  @keyframes pin-shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .numpad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 auto 8px;max-width:280px}
+  .numpad.compact{gap:8px;max-width:240px}
+  .numpad-btn{aspect-ratio:1;border-radius:14px;background:transparent;border:1px solid rgba(201,169,97,.22);color:var(--text);font-size:1.5rem;font-family:'Sarabun',sans-serif;font-weight:500;cursor:pointer;transition:transform .1s,background .15s,border-color .15s,box-shadow .15s,color .15s;user-select:none;-webkit-tap-highlight-color:transparent;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(2px);padding:0}
+  .numpad.compact .numpad-btn{font-size:1.25rem;border-radius:12px}
+  .numpad-btn:hover{background:rgba(201,169,97,.06);border-color:rgba(201,169,97,.55);color:var(--gold-bright)}
+  .numpad-btn:active{transform:scale(.93);background:rgba(201,169,97,.14);border-color:var(--gold);box-shadow:0 0 22px rgba(201,169,97,.3),inset 0 0 12px rgba(201,169,97,.1);color:var(--gold-bright)}
+  .numpad-btn.action{font-size:1rem;color:var(--muted);font-family:'Sarabun',sans-serif}
+  .numpad.compact .numpad-btn.action{font-size:.9rem}
+  .numpad-btn.action.backspace{font-size:1.4rem}
+
+  .status-banner{text-align:center;margin-bottom:20px;padding:8px 16px;background:rgba(14,26,47,.4);border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.9rem;letter-spacing:.5px;display:inline-block;align-self:center}
+  .status-banner.live{color:var(--gold-bright);border-color:rgba(201,169,97,.4)}
+  .status-banner .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-right:8px;box-shadow:0 0 8px var(--gold);animation:pulse-dot 2s ease-in-out infinite}
+  @keyframes pulse-dot{0%,100%{opacity:.5}50%{opacity:1}}
+
+  .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+  .panel-head h2{font-family:'Mali',cursive;font-size:1.55rem;color:var(--gold-bright);text-shadow:0 0 10px rgba(230,201,122,.25)}
+  .section-heading{font-family:'Sarabun',sans-serif;font-weight:700;font-size:.95rem;color:var(--gold-bright);letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .section-heading::before{content:'';width:24px;height:1px;background:var(--gold);flex-shrink:0}
+  .panel-meta{color:var(--muted);font-size:.95rem}
+
+  .user-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .user-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(201,169,97,.08);border:1px solid rgba(201,169,97,.25);border-radius:999px;padding:6px 14px;font-family:'Mali',cursive;font-size:1rem;cursor:pointer;transition:background .15s,border-color .15s}
+  .user-chip:hover{background:rgba(201,169,97,.16);border-color:var(--gold)}
+  .user-chip .role{font-family:'Sarabun',sans-serif;font-weight:700;font-size:.7rem;color:var(--gold);letter-spacing:1.5px;padding:2px 8px;background:rgba(201,169,97,.2);border-radius:999px}
+  .user-chip .x{cursor:pointer;color:var(--muted);font-size:.95rem;padding:2px 4px;line-height:1}
+  .user-chip .x:hover{color:#ffb4ad}
+
+  .ud-block{padding:14px 16px;background:rgba(20,35,60,.4);border:1px solid var(--line);border-radius:14px;margin:10px 0}
+  .ud-section-label{font-family:'Sarabun',sans-serif;font-size:.72rem;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+  .ud-name{font-family:'Mali',cursive;color:var(--gold-bright);font-size:1.3rem;margin-bottom:6px;word-break:break-word}
+  .ud-msg{color:var(--text);font-family:'Mali',cursive;font-size:.95rem;line-height:1.5;white-space:pre-wrap;word-break:break-word;background:rgba(201,169,97,.08);border-left:3px solid var(--gold);padding:8px 12px;border-radius:8px;margin-top:6px}
+  .ud-msg.empty{color:var(--muted);font-style:italic;border-left-color:var(--line);background:rgba(36,58,94,.18)}
+  .ud-divider{text-align:center;color:var(--muted);font-size:.85rem;margin:8px 0;letter-spacing:1px}
+  .ud-empty{color:var(--muted);font-style:italic;text-align:center;padding:14px;font-size:.95rem}
+  .user-list-empty{color:var(--muted);font-style:italic;padding:14px;text-align:center}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+  .stat{background:rgba(10,19,34,.5);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+  .stat .num{font-family:'Mali',cursive;font-size:1.6rem;color:var(--gold)}
+  .stat .label{color:var(--muted);font-size:.85rem;letter-spacing:.5px}
+
+  .reveal-stage{position:relative;width:100%;max-width:520px;margin:14px auto;min-height:240px;border-radius:18px;overflow:hidden;background:radial-gradient(circle at 50% 50%,#1f3a64 0%,#0a1322 75%);border:2px solid var(--gold);box-shadow:inset 0 0 32px rgba(201,169,97,.12),0 8px 24px rgba(0,0,0,.4);padding:28px 24px}
+  .reveal-stage .content{position:relative;clip-path:inset(0 calc(100% - var(--scan,0%)) 0 0);-webkit-clip-path:inset(0 calc(100% - var(--scan,0%)) 0 0)}
+  .reveal-stage .partner-name{font-family:'Mali',cursive;font-size:clamp(1.6rem,5vw,2.4rem);color:var(--gold-bright);text-align:center;margin-bottom:14px;line-height:1.15;text-shadow:0 0 18px rgba(230,201,122,.5)}
+  .reveal-stage .partner-message{background:rgba(201,169,97,.1);border-left:3px solid var(--gold);border-radius:10px;padding:14px 16px;color:var(--text);font-family:'Mali',cursive;font-size:1.05rem;line-height:1.55;white-space:pre-wrap;word-break:break-word;text-align:left}
+  .reveal-stage .partner-message.empty{color:var(--muted);font-style:italic;border-left-color:var(--line);background:rgba(36,58,94,.18)}
+  .reveal-stage .from-tag{font-family:'Sarabun',sans-serif;font-weight:700;font-size:.78rem;color:var(--muted);margin-bottom:6px;letter-spacing:.8px;text-transform:uppercase}
+  .reveal-stage .beam{position:absolute;top:-6px;bottom:-6px;left:var(--scan,0%);width:5px;background:linear-gradient(to right,transparent,var(--gold-bright),transparent);filter:blur(2px);transform:translateX(-50%);box-shadow:0 0 24px var(--gold-bright),0 0 48px var(--gold),0 0 96px rgba(201,169,97,.5);pointer-events:none;transition:opacity .4s}
+  .reveal-stage.no-partner{background:radial-gradient(circle at 50% 50%,#2a1a1a 0%,#0a0508 75%);border-color:#5a2c2c}
+  .reveal-stage .no-partner-msg{text-align:center;color:#ffb4ad;font-family:'Mali',cursive;font-size:1.3rem;padding:30px}
+  .reveal-stage.done .beam{opacity:0}
+
+  .song-card{display:flex;align-items:center;gap:12px;padding:12px 14px;margin-top:14px;background:rgba(20,35,60,.45);border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--text);transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer}
+  .song-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 0 1px rgba(201,169,97,.18)}
+  .platform-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--brand,#444);overflow:hidden}
+  .platform-icon svg{width:24px;height:24px;fill:#fff}
+  .platform-icon.apple-music{background:linear-gradient(135deg,#fa233b 0%,#fb5c74 100%)}
+  .platform-icon.thumb{padding:0}
+  .platform-icon.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+
+  .hints-panel{margin-top:14px;padding:14px 16px;background:rgba(20,35,60,.4);border:1px solid var(--line);border-radius:14px;text-align:left}
+  .hint-tabs{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap}
+  .hint-tab{background:rgba(14,26,47,.6);border:1px solid var(--line);color:var(--muted);padding:5px 12px;border-radius:999px;font-family:'Sarabun',sans-serif;font-size:.78rem;cursor:pointer;width:auto;height:auto;line-height:1.3;transition:all .15s}
+  .hint-tab:hover{color:var(--text);border-color:var(--gold)}
+  .hint-tab.active{background:var(--gold);color:#0a1322;border-color:var(--gold);font-weight:700}
+  .partner-divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:18px 0 14px}
+  .hints-title{font-family:'Sarabun',sans-serif;font-weight:700;font-size:.72rem;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+  .hints-list{margin:0;padding-left:24px;color:var(--text);font-family:'Mali',cursive;line-height:1.7}
+  .hints-list li{margin-bottom:4px;position:relative;padding-right:32px;animation:hint-in .3s ease both}
+  .hints-list li::marker{color:var(--rose)}
+  .hints-list li.hint-new{animation:hint-flash 1.4s ease-out both}
+  @keyframes hint-in{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes hint-flash{0%{background:rgba(217,127,156,.4);box-shadow:0 0 0 4px rgba(217,127,156,.3);transform:translateX(-6px);opacity:0}15%{opacity:1;transform:translateX(0)}100%{background:transparent;box-shadow:0 0 0 0 rgba(217,127,156,0)}}
+  .hints-empty{color:var(--muted);font-style:italic;font-size:.95rem;font-family:'Mali',cursive}
+  .hint-del{position:absolute;right:0;top:2px;background:transparent;border:none;color:var(--muted);font-size:.85rem;cursor:pointer;padding:2px 6px;border-radius:6px;width:auto;height:auto;line-height:1}
+  .hint-del:hover{color:#ffb4ad;background:rgba(231,76,60,.1)}
+  .hint-compose{display:flex;gap:8px;margin-top:12px}
+  .hint-compose input{flex:1}
+  .hint-compose button{flex-shrink:0;padding:0 16px;font-size:.95rem;width:auto;height:auto;white-space:nowrap}
+
+  .welcome-notify{display:inline-block;padding:8px 14px;border-radius:999px;background:rgba(217,127,156,.12);border:1px solid var(--rose);color:#fbb8cd;font-size:.9rem;font-family:'Mali',cursive;margin-bottom:14px;animation:notify-pulse 1.6s ease-in-out infinite}
+  @keyframes notify-pulse{0%,100%{box-shadow:0 0 0 0 rgba(217,127,156,.5)}50%{box-shadow:0 0 0 6px rgba(217,127,156,0)}}
+  #welcome-action-badge{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 7px;margin-left:8px;border-radius:999px;background:var(--rose);color:#fff;font-family:'Sarabun',sans-serif;font-weight:700;font-size:.8rem;vertical-align:middle}
+
+  .welcome-secondary{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:14px}
+  .welcome-divider{color:var(--muted);opacity:.5}
+  .link-btn{background:none;border:none;color:var(--muted);font-family:'Sarabun',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.3px;padding:4px 6px;cursor:pointer;border-radius:4px;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px;transition:color .15s,text-decoration-color .15s;box-shadow:none;height:auto}
+  .link-btn:hover:not(:disabled){background:transparent;color:var(--gold-bright);text-decoration-color:var(--gold);transform:none;box-shadow:none}
+  .link-btn.link-danger:hover:not(:disabled){color:#ffb4ad;text-decoration-color:var(--danger)}
+  .song-info{flex:1;min-width:0}
+  .song-title{font-family:'Mali',cursive;font-weight:700;color:var(--gold-bright);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:1rem}
+  .song-artist{font-size:.85rem;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .song-meta-line{font-size:.72rem;color:var(--muted);margin-top:2px;letter-spacing:.5px;text-transform:uppercase}
+  .song-arrow{color:var(--muted);font-size:1.1rem;flex-shrink:0;transition:transform .2s,color .2s}
+  .song-card:hover .song-arrow{color:var(--gold-bright);transform:translate(2px,-2px)}
+
+  .song-preview{display:flex;align-items:center;gap:10px;margin-top:8px;padding:8px 12px;background:rgba(20,35,60,.35);border:1px solid var(--line);border-radius:10px;font-size:.85rem}
+  .song-preview .platform-icon{width:28px;height:28px;border-radius:8px}
+  .song-preview .platform-icon svg{width:16px;height:16px}
+  .song-preview .preview-text{flex:1;color:var(--gold-bright)}
+  .song-preview.invalid{border-color:rgba(231,76,60,.4);background:rgba(231,76,60,.08)}
+  .song-preview.invalid .preview-text{color:#ffb4ad}
+
+  .modal-bg{position:fixed;inset:0;background:rgba(2,5,12,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:50;animation:fadeIn .25s ease both;padding:20px}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .modal{background:linear-gradient(180deg,var(--bg-1) 0%,#0a1322 100%);border:1px solid var(--gold);border-radius:22px;padding:30px 26px;max-width:460px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.7),0 0 0 1px rgba(201,169,97,.3);animation:popIn .28s cubic-bezier(.34,1.56,.64,1) both}
+  @keyframes popIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+  .modal h2{font-family:'Mali',cursive;color:var(--gold);margin-bottom:8px;font-size:1.4rem}
+  .modal p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+  .modal .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+
+  .admin-link{position:fixed;bottom:14px;right:14px;background:rgba(14,26,47,.7);border:1px solid var(--line);color:var(--muted);padding:8px 14px;border-radius:999px;font-family:'Sarabun',sans-serif;font-size:.85rem;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:all .15s;z-index:5}
+  .admin-link:hover{color:var(--gold);border-color:var(--gold);background:rgba(14,26,47,.9)}
+
+  .sync-pill{position:fixed;top:14px;right:14px;display:flex;align-items:center;gap:8px;background:rgba(14,26,47,.7);border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:999px;font-family:'Sarabun',sans-serif;font-size:.8rem;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:5;transition:opacity .25s,color .15s,border-color .15s}
+  .sync-pill .dot{width:8px;height:8px;border-radius:50%;background:#3aa163;box-shadow:0 0 6px #3aa163}
+  .sync-pill.busy{color:var(--gold);border-color:var(--gold)}
+  .sync-pill.busy .dot{background:var(--gold);box-shadow:0 0 6px var(--gold);animation:pulse-dot 1s ease-in-out infinite}
+  .sync-pill.error{color:#ffb4ad;border-color:#5a2c2c}
+  .sync-pill.error .dot{background:var(--danger);box-shadow:0 0 6px var(--danger)}
+
+  .config-error{text-align:left;background:rgba(231,76,60,.06);border:1px solid rgba(231,76,60,.3);border-radius:14px;padding:18px;color:var(--text);font-size:.9rem;line-height:1.7;max-width:600px;margin:0 auto}
+  .config-error h3{color:#ffb4ad;font-family:'Mali',cursive;margin-bottom:10px}
+  .config-error code{background:rgba(0,0,0,.4);padding:2px 6px;border-radius:4px;color:var(--gold-bright);font-size:.85rem}
+  .config-error a{color:var(--gold);border-bottom:1px dotted var(--gold);text-decoration:none}
+  .config-error ol{padding-left:20px}
+  .config-error ol li{margin:5px 0}
+
+  /* ── Math decoration layer ──────────────── */
+  #math-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1;contain:layout paint size}
+  .math-glyph{
+    position:absolute;
+    font-family:'Cambria Math','STIX Two Math','Latin Modern Math',Georgia,serif;
+    font-style:italic;
+    color:rgba(201,169,97,.32);
+    pointer-events:none;
+    user-select:none;
+    will-change:transform,opacity;
+    animation:glyph-drift var(--t,70s) ease-in-out infinite alternate;
+    animation-delay:var(--d,0s);
+    text-shadow:0 0 16px rgba(201,169,97,.28);
+    white-space:nowrap;
+    line-height:1;
+  }
+  .math-glyph.cyan{color:rgba(120,170,230,.28);text-shadow:0 0 16px rgba(120,170,230,.24)}
+  .math-glyph.violet{color:rgba(160,110,200,.28);text-shadow:0 0 16px rgba(160,110,200,.24)}
+  @keyframes glyph-drift{
+    0%   {transform:translate(0,0) scale(1)}
+    33%  {transform:translate(18px,-12px) scale(1.05)}
+    66%  {transform:translate(-14px,16px) scale(.95)}
+    100% {transform:translate(8px,-20px) scale(1.02)}
+  }
+
+  /* Lissajous orbit accent — subtle gold dot orbiting near the title */
+  .orbit-ring{
+    position:absolute;
+    width:340px;height:340px;
+    border-radius:50%;
+    border:1px dashed rgba(201,169,97,.10);
+    pointer-events:none;
+    top:-100px;left:50%;transform:translateX(-50%);
+  }
+  .orbit-ring::before{
+    content:'';
+    position:absolute;
+    width:6px;height:6px;
+    background:var(--gold-bright);
+    border-radius:50%;
+    box-shadow:0 0 12px var(--gold-bright),0 0 24px rgba(201,169,97,.4);
+    top:-3px;left:50%;
+    transform-origin:0 173px;
+    animation:orbit-spin var(--orbit-t,18s) linear infinite;
+  }
+  @keyframes orbit-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+  /* Sine wave SVG below header */
+  .wave-band{
+    width:100%;max-width:560px;
+    margin:22px auto 6px;
+    height:36px;
+    pointer-events:none;
+    opacity:.55;
+  }
+  .wave-band svg{width:100%;height:100%;display:block}
+  .wave-band path{
+    stroke:var(--gold);
+    stroke-width:1.2;
+    fill:none;
+    stroke-dasharray:5 4;
+    animation:wave-shift 14s linear infinite;
+  }
+  @keyframes wave-shift{
+    from{stroke-dashoffset:0}
+    to{stroke-dashoffset:-180}
+  }
+
+  /* ── Interactive: click burst, mouse trail, confetti ── */
+  .click-burst{
+    position:fixed;
+    pointer-events:none;
+    z-index:100;
+    width:0;height:0;
+  }
+  .click-burst span{
+    position:absolute;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--gold-bright);
+    box-shadow:0 0 10px var(--gold-bright),0 0 18px var(--gold);
+    transform:translate(-50%,-50%);
+    animation:burst-out .7s cubic-bezier(.2,.6,.3,1) forwards;
+  }
+  @keyframes burst-out{
+    0%   {transform:translate(-50%,-50%) scale(1);opacity:1}
+    100% {transform:translate(calc(-50% + var(--dx,0px)),calc(-50% + var(--dy,0px))) scale(.2);opacity:0}
+  }
+
+  .trail{
+    position:fixed;
+    width:4px;height:4px;
+    border-radius:50%;
+    background:rgba(230,201,122,.7);
+    box-shadow:0 0 6px var(--gold-bright);
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:99;
+    animation:trail-fade .85s ease-out forwards;
+    will-change:opacity,transform;
+  }
+  @keyframes trail-fade{
+    0%   {opacity:1;transform:translate(-50%,-50%) scale(1)}
+    100% {opacity:0;transform:translate(-50%,-50%) scale(.3)}
+  }
+
+  .confetti{
+    position:fixed;
+    top:-20px;
+    width:8px;height:14px;
+    z-index:80;
+    pointer-events:none;
+    border-radius:2px;
+    animation:confetti-fall var(--dur,3s) cubic-bezier(.4,.05,.6,.4) forwards;
+    will-change:transform,opacity;
+  }
+  @keyframes confetti-fall{
+    0%   {transform:translateY(0) rotate(0deg);opacity:0}
+    10%  {opacity:1}
+    100% {transform:translateY(110vh) rotate(var(--rot,720deg));opacity:.6}
+  }
+
+  /* Button hover halo */
+  button.cta::after{
+    content:'';
+    position:absolute;
+    inset:-2px;
+    border-radius:inherit;
+    background:radial-gradient(circle at 50% 50%,rgba(230,201,122,.5),transparent 70%);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s;
+    z-index:-1;
+  }
+  button.cta{position:relative;z-index:1}
+  button.cta:hover::after{opacity:1;animation:halo-pulse 1.6s ease-in-out infinite}
+  @keyframes halo-pulse{
+    0%,100% {transform:scale(1);opacity:.4}
+    50%     {transform:scale(1.15);opacity:.7}
+  }
+
+  body.lite .trail{display:none}
+  body.lite .click-burst span{box-shadow:none}
+
+  /* Input glow on keystroke */
+  input.typing,textarea.typing{
+    animation:typing-glow .5s ease-out;
+  }
+  @keyframes typing-glow{
+    0%   {box-shadow:0 0 0 3px rgba(201,169,97,.18)}
+    40%  {box-shadow:0 0 0 5px rgba(201,169,97,.4),0 0 16px rgba(230,201,122,.3)}
+    100% {box-shadow:0 0 0 3px rgba(201,169,97,.18)}
+  }
+
+  /* Title press bounce — smooth */
+  header.site h1{
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1),text-shadow .3s ease;
+    transform-origin:50% 60%;
+  }
+  header.site h1.pressed{
+    animation:title-bounce .55s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes title-bounce{
+    0%   {transform:scale(1) rotate(0)}
+    25%  {transform:scale(1.07) rotate(-1.5deg)}
+    55%  {transform:scale(1.04) rotate(1deg)}
+    100% {transform:scale(1) rotate(0)}
+  }
+
+  /* ── Mobile / lite mode (cheap effects) ── */
+  body.lite .nebula{filter:blur(28px);opacity:.16}
+  body.lite .nebula.cyan{display:none}
+  body.lite .starfield{animation:none}
+  body.lite .star.pulse{animation:twinkle var(--t,4s) ease-in-out infinite}
+  body.lite .star.bright::before,
+  body.lite .star.bright::after{display:none}
+  body.lite .dust{display:none}
+  body.lite .glass-panel{
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+    background:rgba(14,26,47,.92);
+  }
+  body.lite .modal-bg{
+    backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);
+    background:rgba(2,5,12,.92);
+  }
+  body.lite .math-glyph{animation-duration:140s}
+  body.lite .orbit-ring{display:none}
+  body.lite .reveal-stage{box-shadow:0 4px 12px rgba(0,0,0,.4)}
+  body.lite .wave-band{opacity:.35}
+
+  .hidden{display:none !important}
+
+  @media(max-width:640px){
+    .role-picker{flex-direction:column}
+    .stats{grid-template-columns:1fr 1fr}
+    .reveal-stage{padding:22px 18px;min-height:200px}
+    .sync-pill{top:8px;right:8px;font-size:.75rem}
+    .admin-link{bottom:8px;right:8px}
+    .orbit-ring{width:240px;height:240px;top:-60px}
+    .orbit-ring::before{transform-origin:0 123px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .nebula,.star,.starfield,.dust,.math-glyph,.wave-band path,.orbit-ring::before{animation:none}
+  }
+</style>
+</head>
+<body>
+  <div id="bg">
+    <div class="nebula gold"></div>
+    <div class="nebula cyan"></div>
+    <div class="nebula rose"></div>
+    <div class="starfield far"  id="layer-far"></div>
+    <div class="starfield mid"  id="layer-mid"></div>
+    <div class="starfield near" id="layer-near"></div>
+  </div>
+  <div id="math-layer"></div>
+
+  <div class="sync-pill" id="sync-pill">
+    <span class="dot"></span><span id="sync-text" data-text="syncOnline">เชื่อมต่อแล้ว</span>
+  </div>
+
+  <div class="app">
+    <section id="screen-config" class="hero hidden">
+      <header class="site">
+        <h1 data-text="setupTitle">ตั้งค่า Firebase</h1>
+        <p class="subtitle" data-text="setupSubtitle">ทำครั้งเดียวก่อน deploy</p>
+      </header>
+      <div class="config-error">
+        <h3 data-text="setupErrorH3">⚠ ยังไม่ได้ตั้งค่า Firebase</h3>
+        <p data-text="setupInstr">เปิดไฟล์ index.html ในเครื่อง แล้วหา section FIREBASE CONFIG paste ค่าจาก Firebase Console</p>
+        <p style="color:var(--gold);margin:14px 0 6px"><strong data-text="setupHowto">วิธีรับค่า Firebase config:</strong></p>
+        <ol>
+          <li data-text="setupStep1"></li>
+          <li data-text="setupStep2"></li>
+          <li data-text="setupStep3"></li>
+          <li data-text="setupStep4"></li>
+          <li data-text="setupStep5"></li>
+        </ol>
+        <p style="margin-top:14px;color:var(--muted);font-size:.85rem" data-text="setupLocation"></p>
+      </div>
+    </section>
+
+    <section id="screen-home" class="hero hidden">
+      <header class="site">
+        <h1 data-text="appTitle">จับคู่พี่รหัส × น้องรหัส</h1>
+        <p class="subtitle" data-text="appSubtitle">ม.5/1</p>
+        <div class="wave-band">
+          <svg viewBox="0 0 400 36" preserveAspectRatio="none">
+            <path d="M0,18 Q25,4 50,18 T100,18 T150,18 T200,18 T250,18 T300,18 T350,18 T400,18" />
+          </svg>
+        </div>
+      </header>
+      <div id="status-banner" class="status-banner">
+        <span class="dot"></span><span id="status-text" data-text="statusLoading">กำลังโหลด...</span>
+      </div>
+
+      <div id="welcome-panel" class="glass-panel hidden" style="margin-top:16px;text-align:center">
+        <p style="color:var(--muted);margin-bottom:14px;font-size:.95rem;letter-spacing:.5px" data-text="welcomeBack">ยินดีต้อนรับกลับ</p>
+        <div id="welcome-name" style="font-family:'Mali',cursive;font-size:1.7rem;color:var(--gold-bright);margin-top:6px;margin-bottom:14px;line-height:1.2;text-shadow:0 0 14px rgba(230,201,122,.3)">—</div>
+        <div id="welcome-notify" class="welcome-notify hidden"></div>
+        <div class="actions" style="margin-top:8px;justify-content:center">
+          <button id="welcome-action" class="cta"><span id="welcome-action-label">แก้ไขข้อมูล</span><span id="welcome-action-badge" class="hidden">0</span></button>
+        </div>
+        <div class="welcome-secondary">
+          <button id="welcome-switch" class="link-btn" data-text="btnSwitchUser">เปลี่ยนผู้ใช้</button>
+          <span class="welcome-divider">·</span>
+          <button id="welcome-delete" class="link-btn link-danger" data-text="btnDelete">ลบบัญชี</button>
+        </div>
+      </div>
+
+      <div id="login-panel" class="glass-panel" style="margin-top:16px">
+        <div class="input-group">
+          <label for="home-name" data-text="homeNameLabel">ใส่ชื่อของคุณ</label>
+          <input type="text" id="home-name" data-placeholder="homeNamePlaceholder" autocomplete="off">
+        </div>
+        <div class="actions">
+          <button id="home-go" class="cta" data-text="btnGo">ดำเนินการ</button>
+        </div>
+        <div id="home-warn" class="warning hidden"></div>
+        <p id="home-tip" style="text-align:center;color:var(--muted);font-size:.85rem;margin-top:18px;line-height:1.6;min-height:2.6em;transition:opacity .35s ease"></p>
+      </div>
+    </section>
+
+    <section id="screen-register" class="hero hidden">
+      <header class="site">
+        <h1 data-text="registerTitle">ลงทะเบียน</h1>
+      </header>
+      <div class="glass-panel">
+        <div class="input-group">
+          <div class="role-picker">
+            <label><input type="radio" name="reg-role" value="senior" checked><span class="role-card"><span class="icon">★</span><span data-text="roleSeniorFull">พี่รหัส</span></span></label>
+            <label><input type="radio" name="reg-role" value="junior"><span class="role-card"><span class="icon">☆</span><span data-text="roleJuniorFull">น้องรหัส</span></span></label>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="reg-name" data-text="registerNameLabel">ชื่อ</label>
+          <input type="text" id="reg-name" data-placeholder="registerNamePlaceholder" autocomplete="off">
+        </div>
+        <div class="input-group">
+          <label for="reg-msg" data-text="registerMsgLabel">ข้อความถึง "คู่ในอนาคต"</label>
+          <textarea id="reg-msg" data-placeholder="registerMsgPlaceholder"></textarea>
+        </div>
+        <div class="input-group">
+          <label for="reg-song-url" data-text="registerSongUrlLabel">เพลงที่ฝากให้คู่ฟัง (ไม่ใส่ก็ได้)</label>
+          <input type="url" id="reg-song-url" data-placeholder="registerSongUrlPlaceholder" autocomplete="off">
+          <div id="reg-song-preview" class="song-preview hidden"></div>
+          <p style="font-size:.75rem;color:var(--muted);margin-top:6px;line-height:1.5" data-text="registerSongHint">รองรับ Spotify · YouTube · YouTube Music · SoundCloud · Apple Music · Tidal</p>
+        </div>
+        <div class="input-group">
+          <input type="text" id="reg-song-title" data-placeholder="registerSongTitlePlaceholder" autocomplete="off" readonly>
+          <input type="hidden" id="reg-song-thumbnail">
+        </div>
+        <div class="actions">
+          <button id="reg-next" class="cta" data-text="btnNext">ต่อไป</button>
+          <button id="reg-cancel" class="ghost" data-text="btnCancel">ยกเลิก</button>
+        </div>
+        <div id="reg-warn" class="warning hidden"></div>
+      </div>
+    </section>
+
+    <section id="screen-register-pin" class="hero hidden">
+      <header class="site">
+        <h1 data-text="registerPinTitle">ตั้ง PIN</h1>
+        <p class="subtitle" data-text="registerPinSubtitle">ป้องกันคนสวมรอย</p>
+      </header>
+      <div class="glass-panel">
+        <p style="text-align:center;color:var(--muted);font-size:.9rem;margin-bottom:6px;line-height:1.6" data-text="registerPinHint">PIN ใช้ยืนยันตัวตนตอน login จากเครื่องอื่น</p>
+        <div class="pin-stage-label" id="reg-pin-stage-label">ตั้ง PIN (4-6 หลัก)</div>
+        <div class="pin-display" id="reg-pin-display">
+          <span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span>
+          <span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span>
+        </div>
+        <div class="numpad" id="reg-pin-numpad">
+          <button type="button" class="numpad-btn" data-digit="1">1</button>
+          <button type="button" class="numpad-btn" data-digit="2">2</button>
+          <button type="button" class="numpad-btn" data-digit="3">3</button>
+          <button type="button" class="numpad-btn" data-digit="4">4</button>
+          <button type="button" class="numpad-btn" data-digit="5">5</button>
+          <button type="button" class="numpad-btn" data-digit="6">6</button>
+          <button type="button" class="numpad-btn" data-digit="7">7</button>
+          <button type="button" class="numpad-btn" data-digit="8">8</button>
+          <button type="button" class="numpad-btn" data-digit="9">9</button>
+          <button type="button" class="numpad-btn action" id="reg-pin-clear" data-text="numpadClear">ล้าง</button>
+          <button type="button" class="numpad-btn" data-digit="0">0</button>
+          <button type="button" class="numpad-btn action backspace" id="reg-pin-backspace" aria-label="backspace">⌫</button>
+        </div>
+        <div class="actions">
+          <button id="reg-save" class="cta" data-text="btnNext">ต่อไป</button>
+          <button id="reg-pin-back" class="ghost" data-text="btnBack">กลับ</button>
+        </div>
+        <div id="reg-pin-warn" class="warning hidden"></div>
+      </div>
+    </section>
+
+    <section id="screen-edit" class="hero hidden">
+      <header class="site"><h1 data-text="editTitle">ข้อมูลของฉัน</h1><p class="subtitle" id="edit-role-label">—</p></header>
+      <div class="glass-panel">
+        <div class="input-group"><label for="edit-name" data-text="editNameLabel">ชื่อ</label><input type="text" id="edit-name" autocomplete="off"></div>
+        <div class="input-group"><label for="edit-msg" data-text="editMsgLabel">ข้อความถึงคู่</label><textarea id="edit-msg"></textarea></div>
+        <div class="input-group">
+          <label for="edit-song-url" data-text="editSongUrlLabel">เพลงที่ฝากให้คู่ฟัง</label>
+          <input type="url" id="edit-song-url" data-placeholder="registerSongUrlPlaceholder" autocomplete="off">
+          <div id="edit-song-preview" class="song-preview hidden"></div>
+          <p style="font-size:.75rem;color:var(--muted);margin-top:6px;line-height:1.5" data-text="registerSongHint">รองรับ Spotify · YouTube · YouTube Music · SoundCloud · Apple Music · Tidal</p>
+        </div>
+        <div class="input-group">
+          <input type="text" id="edit-song-title" data-placeholder="registerSongTitlePlaceholder" autocomplete="off" readonly>
+          <input type="hidden" id="edit-song-thumbnail">
+        </div>
+        <div class="actions">
+          <button id="edit-save" class="cta" data-text="btnSave">บันทึก</button>
+          <button id="edit-change-pin" class="ghost" data-text="btnChangePin">เปลี่ยน PIN</button>
+          <button id="edit-back" class="ghost" data-text="btnBack">กลับ</button>
+        </div>
+        <div id="edit-warn" class="warning hidden"></div>
+      </div>
+    </section>
+
+    <section id="screen-change-pin" class="hero hidden">
+      <header class="site">
+        <h1 data-text="changePinTitle">เปลี่ยน PIN</h1>
+        <p class="subtitle" data-text="changePinSubtitle">ใส่ PIN เดิมก่อน แล้วตั้ง PIN ใหม่</p>
+      </header>
+      <div class="glass-panel">
+        <div class="pin-stage-label" id="cpin-stage-label">ใส่ PIN เดิม</div>
+        <div class="pin-display" id="cpin-display">
+          <span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span>
+          <span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span>
+        </div>
+        <div class="numpad" id="cpin-numpad">
+          <button type="button" class="numpad-btn" data-digit="1">1</button>
+          <button type="button" class="numpad-btn" data-digit="2">2</button>
+          <button type="button" class="numpad-btn" data-digit="3">3</button>
+          <button type="button" class="numpad-btn" data-digit="4">4</button>
+          <button type="button" class="numpad-btn" data-digit="5">5</button>
+          <button type="button" class="numpad-btn" data-digit="6">6</button>
+          <button type="button" class="numpad-btn" data-digit="7">7</button>
+          <button type="button" class="numpad-btn" data-digit="8">8</button>
+          <button type="button" class="numpad-btn" data-digit="9">9</button>
+          <button type="button" class="numpad-btn action" id="cpin-clear" data-text="numpadClear">ล้าง</button>
+          <button type="button" class="numpad-btn" data-digit="0">0</button>
+          <button type="button" class="numpad-btn action backspace" id="cpin-backspace" aria-label="backspace">⌫</button>
+        </div>
+        <div class="actions">
+          <button id="cpin-next" class="cta" data-text="btnNext">ต่อไป</button>
+          <button id="cpin-back" class="ghost" data-text="btnBack">กลับ</button>
+        </div>
+        <div id="cpin-warn" class="warning hidden"></div>
+      </div>
+    </section>
+
+    <section id="screen-reveal" class="hero hidden">
+      <header class="site"><h1 id="reveal-title">คู่ของคุณ</h1><p class="subtitle" id="reveal-self-label">—</p></header>
+      <div class="reveal-stage" id="reveal-stage"></div>
+      <p class="status-banner" id="reveal-hint" style="margin-top:8px">กำลังสแกน...</p>
+      <div class="hints-panel hidden" id="hints-panel"></div>
+      <div class="actions"><button id="reveal-back" class="cta" data-text="btnBack">กลับ</button></div>
+    </section>
+
+    <section id="screen-admin" class="panel hidden" style="max-width:880px;margin:24px auto 0">
+      <div class="panel-head"><h2 data-text="adminTitle">Admin Panel</h2><span class="panel-meta" id="admin-status">—</span></div>
+      <div class="stats">
+        <div class="stat"><div class="num" id="stat-seniors">0</div><div class="label" data-text="statSeniorLabel">พี่</div></div>
+        <div class="stat"><div class="num" id="stat-juniors">0</div><div class="label" data-text="statJuniorLabel">น้อง</div></div>
+        <div class="stat"><div class="num" id="stat-pairs">0</div><div class="label" data-text="statPairLabel">คู่</div></div>
+      </div>
+      <h3 style="font-family:'Mali',cursive;color:var(--gold);margin:8px 0 10px;font-size:1.05rem" data-text="adminListHeader">รายชื่อ</h3>
+      <div id="admin-users" class="user-list"></div>
+      <div class="actions" style="justify-content:flex-start">
+        <button id="admin-randomize" class="cta">สุ่มจับคู่</button>
+        <button id="admin-toggle-lock" class="ghost">ปิดการลงทะเบียน</button>
+        <button id="admin-reset-matches" class="ghost" data-text="btnResetMatches">ล้างผลสุ่ม</button>
+        <button id="admin-reset-all" class="danger" data-text="btnResetAll">ล้างข้อมูลทั้งหมด</button>
+        <button id="admin-signout" class="ghost" data-text="btnAdminSignout">ออกจากระบบ</button>
+      </div>
+    </section>
+  </div>
+
+  <button class="admin-link hidden" id="admin-link" data-text="adminLinkLabel">⚙ Admin</button>
+
+  <div id="confirm-modal" class="modal-bg hidden">
+    <div class="modal">
+      <h2 id="confirm-title">ยืนยัน</h2>
+      <p id="confirm-text">—</p>
+      <div class="row">
+        <button id="confirm-yes" data-text="btnConfirm">ยืนยัน</button>
+        <button class="ghost" id="confirm-no" data-text="btnCancel">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="auth-modal" class="modal-bg hidden">
+    <div class="modal">
+      <h2 data-text="authTitle">Admin Access</h2>
+      <p data-text="authDesc">ใส่ email + password ของ admin</p>
+      <div class="input-group" style="text-align:left">
+        <label for="auth-email" data-text="authEmailLabel">Email</label>
+        <input type="email" id="auth-email" autocomplete="off" style="width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:12px;font-family:'Sarabun',sans-serif;font-size:1rem;background:rgba(10,19,34,.7);color:var(--text);outline:none">
+      </div>
+      <div class="input-group" style="text-align:left">
+        <label for="auth-pwd" data-text="authPwdLabel">Password</label>
+        <input type="password" id="auth-pwd" autocomplete="off" style="width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:12px;font-family:monospace;font-size:1rem;background:rgba(10,19,34,.7);color:var(--text);outline:none">
+      </div>
+      <div id="auth-warn" class="warning hidden"></div>
+      <div class="row">
+        <button id="auth-go" data-text="btnAuthGo">เข้าสู่ระบบ</button>
+        <button class="ghost" id="auth-cancel" data-text="btnCancel">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="pin-modal" class="modal-bg hidden">
+    <div class="modal">
+      <h2 data-text="pinModalTitle">ใส่ PIN</h2>
+      <p id="pin-desc">—</p>
+      <div class="pin-display compact" id="pin-display">
+        <span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span>
+        <span class="pin-dot"></span><span class="pin-dot"></span><span class="pin-dot"></span>
+      </div>
+      <div class="numpad compact" id="pin-numpad">
+        <button type="button" class="numpad-btn" data-digit="1">1</button>
+        <button type="button" class="numpad-btn" data-digit="2">2</button>
+        <button type="button" class="numpad-btn" data-digit="3">3</button>
+        <button type="button" class="numpad-btn" data-digit="4">4</button>
+        <button type="button" class="numpad-btn" data-digit="5">5</button>
+        <button type="button" class="numpad-btn" data-digit="6">6</button>
+        <button type="button" class="numpad-btn" data-digit="7">7</button>
+        <button type="button" class="numpad-btn" data-digit="8">8</button>
+        <button type="button" class="numpad-btn" data-digit="9">9</button>
+        <button type="button" class="numpad-btn action" id="pin-clear" data-text="numpadClear">ล้าง</button>
+        <button type="button" class="numpad-btn" data-digit="0">0</button>
+        <button type="button" class="numpad-btn action backspace" id="pin-backspace" aria-label="backspace">⌫</button>
+      </div>
+      <div id="pin-warn" class="warning hidden"></div>
+      <div class="row">
+        <button id="pin-go" data-text="btnAuthGo">ตกลง</button>
+        <button class="ghost" id="pin-cancel" data-text="btnCancel">ยกเลิก</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="user-detail-modal" class="modal-bg hidden">
+    <div class="modal" style="max-width:520px;text-align:left">
+      <div id="ud-content"></div>
+      <div class="row" style="justify-content:center;margin-top:18px">
+        <button class="ghost" id="ud-close" data-text="btnClose">ปิด</button>
+      </div>
+    </div>
+  </div>
+
+<script type="module">
+// ════════════════════════════════════════════════════════════════
+// FIREBASE CONFIG — paste your config from Firebase Console here
+// ════════════════════════════════════════════════════════════════
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDOshXGLHOcdoiuQo0gOQV4XCSADAUloF4",
+  authDomain: "rahut-match.firebaseapp.com",
+  projectId: "rahut-match",
+  storageBucket: "rahut-match.firebasestorage.app",
+  messagingSenderId: "700033003323",
+  appId: "1:700033003323:web:50a1814fb0d2b152cd111e",
+  measurementId: "G-ZHNCVQ8FBF",
+};
+
+// ════════════════════════════════════════════════════════════════
+// ALL UI TEXT — edit here to change any text on the website
+// แก้ที่นี่ที่เดียวเปลี่ยนข้อความทั้งเว็บ
+// ════════════════════════════════════════════════════════════════
+const TEXT = {
+  // Branding
+  pageTitle: 'คู่รหัส Sci-Math WK 2569',
+  appTitle: 'จับคู่พี่รหัส × น้องรหัส',
+  appSubtitle: 'SCI-MATH WK 2569',
+
+  // Roles
+  roleSenior: 'พี่',
+  roleJunior: 'น้อง',
+  roleSeniorFull: 'พี่รหัส',
+  roleJuniorFull: 'น้องรหัส',
+
+  // Sync pill
+  syncOnline: 'ออนไลน์',
+  syncBusy: 'กำลัง sync...',
+  syncError: 'ขัดข้อง',
+  syncSaving: 'กำลังบันทึก...',
+  syncSaveFailed: 'บันทึกล้มเหลว',
+  syncNotConfigured: 'ยังไม่ได้ตั้งค่า',
+  syncConnectFailed: 'เชื่อมต่อล้มเหลว',
+
+  // Setup error screen
+  setupTitle: 'ตั้งค่า Firebase',
+  setupSubtitle: 'ทำครั้งเดียวก่อน deploy',
+  setupErrorH3: '⚠ ยังไม่ได้ตั้งค่า Firebase',
+  setupInstr: 'เปิดไฟล์ index.html ในเครื่อง แล้วหา section FIREBASE_CONFIG ใน <script> paste ค่าจาก Firebase Console',
+  setupHowto: 'วิธีรับค่า Firebase config:',
+  setupStep1: 'ไปที่ firebase.google.com → Get Started → สมัครฟรี (Google)',
+  setupStep2: 'Add Project → ตั้งชื่อ → Continue → Continue → Create project',
+  setupStep3: 'Build → Firestore Database → Create database → "Start in test mode" → Next → location: asia-southeast1 → Enable',
+  setupStep4: 'Project Overview → คลิก </> Web → ลงทะเบียน app → Copy firebaseConfig',
+  setupStep5: 'Paste ในไฟล์ index.html ที่ FIREBASE_CONFIG → Save → upload ใหม่',
+  setupLocation: 'ตำแหน่งใน source: หา FIREBASE_CONFIG ใน index.html',
+
+  // Status banner
+  statusLoading: 'กำลังโหลด...',
+  statusRandomized: '🔒 จับคู่เรียบร้อย',
+  statusEmpty: 'เริ่มต้นได้เลย ☆',
+  statusNotRandomized: (n, s, j) => n === 0 ? '☆ ยังไม่มีใครลงทะเบียน — เป็นคนแรกได้เลย' : `✨ มี ${n} คนพร้อมแล้ว · พี่ ${s} · น้อง ${j}`,
+
+  // Welcome panel
+  welcomeBack: 'ยินดีต้อนรับ',
+  welcomeHint: 'เลือกสิ่งที่จะทำ',
+  welcomeMatchHint: 'สุ่มเสร็จแล้ว มาดูคู่ของคุณ',
+  welcomeEditHint: 'สามารถแก้ข้อมูลได้โดยกด แก้ไขข้อมูล',
+  btnViewMatch: 'ดูคู่รหัส',
+  btnEdit: 'แก้ไขข้อมูล',
+  btnLogout: 'เปลี่ยนผู้ใช้',
+  btnSwitchUser: 'เปลี่ยนผู้ใช้',
+
+  // Home / login
+  homeNameLabel: 'ชื่อ',
+  homeNamePlaceholder: 'ชื่อเล่น เช่น เอ บี ซี',
+  btnGo: 'ต่อไป',
+  homeTips: [
+    '⚠️ พี่แนะนำให้ตั้งใจเรียนวิชาคณิตให้ดีๆ เตือนแล้วนะ',
+    '🔒 ตั้ง PIN 4-6 หลักให้ปลอดภัยที่สุดเพื่อกันคนสวมรอย',
+    '✨ พี่อาจจะส่งคำใบ้ให้น้องตอนไหนก็ได้ แนะนำให้มาเช็คบ่อยๆ',
+    '🔄 เปลี่ยนเครื่องก็ login กลับมาด้วยชื่อ + PIN ได้เลย',
+  ],
+  errEmptyName: 'กรอกชื่อก่อน',
+  errCannotRegisterAfter: 'ไม่สามารถลงทะเบียนได้เพราะได้ทำการจับคู่ไปแล้ว 🥰🥰',
+  errRegistrationLocked: 'ไม่สามารถลงทะเบียนได้เพราะล็อคอยู่',
+  btnLockReg: 'ปิดการลงทะเบียน',
+  btnUnlockReg: 'เปิดการลงทะเบียน',
+  lockRegConfirm: 'ปิดรับลงทะเบียน?',
+  lockRegText: 'ผู้ใช้ใหม่จะลงทะเบียนไม่ได้จนกว่าจะกดเปิดอีกครั้ง',
+  unlockRegConfirm: 'เปิดรับลงทะเบียนอีกครั้ง?',
+  unlockRegText: 'ผู้ใช้ใหม่จะลงทะเบียนได้ตามปกติ',
+  okRegLocked: 'ปิดรับลงทะเบียนแล้ว',
+  okRegUnlocked: 'เปิดรับลงทะเบียนแล้ว',
+  statusRegLocked: '🔒 ปิดรับลงทะเบียนชั่วคราว',
+
+  // Register
+  registerTitle: 'กรอกข้อมูล',
+  registerSubtitle: 'เพื่อจับคู่',
+  registerRoleLabel: 'คุณคือ?',
+  registerNameLabel: 'ชื่อ',
+  registerNamePlaceholder: 'ชื่อของคุณ',
+  registerMsgLabel: 'ข้อความถึงคู่รหัส (น้องรหัสจะไม่เห็นชื่อพี่รหัส)',
+  registerMsgPlaceholder: 'ใส่ช่องทางการติดต่อและข้อความอะไรก็ได้เช่น ig: prm.vil, ชอบช็อคโกแลต',
+  registerSongUrlLabel: 'เพลงที่ฝากให้คู่ฟัง (ไม่ใส่ก็ได้)',
+  registerSongUrlPlaceholder: 'วาง link เพลง — Spotify, YouTube ฯลฯ',
+  registerSongTitleLabel: '',
+  registerSongTitlePlaceholder: '',
+  registerSongArtistLabel: 'ศิลปิน',
+  registerSongArtistPlaceholder: 'ชื่อศิลปิน',
+  registerSongHint: 'รองรับ Spotify · YouTube · YouTube Music · SoundCloud · Apple Music · Tidal',
+  songPreviewValid: (p) => `ตรวจแล้ว: ${p}`,
+  songPreviewInvalid: 'ลิ้งนี้ไม่รองรับ — ใช้ได้เฉพาะ Spotify / YouTube / SoundCloud / Apple Music / Tidal',
+  songFetching: 'กำลังดึงข้อมูลเพลง...',
+  songAutoFetched: (p) => `ดึงข้อมูลจาก ${p} แล้ว`,
+  songFetchFailed: (p) => `ดึงข้อมูล ${p} ไม่สำเร็จ — พิมพ์เอง`,
+  errSongUrlInvalid: 'ลิ้งเพลงไม่รองรับ ใส่ลิ้งจาก Spotify/YouTube/SoundCloud/Apple Music/Tidal',
+  errSongTitleRequired: 'ใส่ชื่อเพลงด้วย (เพราะ link เพลงเเล้ว)',
+  editSongUrlLabel: 'เพลงที่ฝากให้คู่ฟัง',
+  songOnPlatform: (p) => `เปิดบน ${p}`,
+  registerPinTitle: 'ตั้ง PIN',
+  registerPinSubtitle: 'ป้องกันคนสวมรอย',
+  registerPinHint: 'PIN ใช้ยืนยันตัวตนตอน login จากเครื่องอื่น กรุณาจำให้ดี',
+  registerPinStageEnter: 'ตั้ง PIN (4-6 หลัก)',
+  registerPinStageConfirm: 'ยืนยัน PIN อีกครั้ง',
+  numpadClear: 'ล้าง',
+  btnNext: 'ต่อไป',
+  btnSave: 'บันทึก',
+  btnCancel: 'ยกเลิก',
+  errDuplicate: 'มีชื่อนี้ลงทะเบียนแล้ว',
+  errLocked: 'สุ่มแล้ว ลงทะเบียนไม่ได้',
+  errPinInvalid: 'PIN ต้องเป็นตัวเลข 4-6 หลัก',
+  errPinMismatch: 'PIN ทั้ง 2 ช่องไม่ตรงกัน',
+  errPinRequired: 'กรุณาใส่ PIN',
+  errPinWrong: 'PIN ไม่ถูกต้อง',
+  okRegistered: (rl, n) => `ลงทะเบียน ${rl}${n} แล้ว`,
+  msgSaving: 'กำลังบันทึก...',
+  errSaveFail: (m) => 'บันทึกล้มเหลว: ' + m,
+
+  // PIN modal
+  pinModalTitle: 'ใส่ PIN',
+  pinModalDesc: (n) => `ใส่ PIN ของบัญชี "${n}"`,
+  pinPlaceholder: 'PIN',
+
+  // Edit
+  editTitle: 'ข้อมูลของฉัน',
+  editNameLabel: 'ชื่อ',
+  editMsgLabel: 'ข้อความถึงคู่',
+  btnBack: 'กลับ',
+  btnDelete: 'ลบข้อมูล',
+  btnChangePin: 'เปลี่ยน PIN',
+  okSaved: 'บันทึกแล้ว',
+
+  // Change PIN
+  changePinTitle: 'เปลี่ยน PIN',
+  changePinSubtitle: 'ใส่ PIN เดิมก่อน แล้วตั้ง PIN ใหม่',
+  changePinStageCurrent: 'ใส่ PIN เดิม',
+  changePinStageNew: 'ตั้ง PIN ใหม่ (4-6 หลัก)',
+  changePinStageConfirm: 'ยืนยัน PIN ใหม่',
+  okPinChanged: 'เปลี่ยน PIN แล้ว',
+  errPinNoAccount: 'ไม่พบบัญชี',
+  errPinNotSet: 'บัญชีนี้ยังไม่ได้ตั้ง PIN',
+  errPinChangeSaveFail: (m) => 'บันทึก PIN ใหม่ล้มเหลว: ' + m,
+  errNotFound: 'ไม่พบบัญชี อาจถูกลบไปแล้ว',
+  errEditLocked: 'สุ่มแล้ว แก้ไม่ได้',
+  delConfirmTitle: (n) => `ลบข้อมูล`,
+  delConfirmText: 'ข้อมูลจะถูกลบทั้งหมด แน่ใจป่าว?',
+  okDeleted: 'ลบแล้ว',
+  errDelFail: (m) => 'ลบล้มเหลว: ' + m,
+  errDeleteAfterRandomize: 'สุ่มแล้ว ลบบัญชีไม่ได้',
+
+  // Reveal
+  revealDefaultTitle: 'คู่ของคุณ',
+  revealSeniorTitle: 'น้องของคุณคือ',
+  revealSeniorTitleMulti: (n) => `น้องของคุณ ${n} คน`,
+  revealJuniorTitle: 'ข้อความจากพี่รหัส',
+  revealNoPairTitle: 'ผลลัพธ์',
+  revealMysteryName: '???',
+  revealFromTag: (rl) => `ข้อความจาก${rl}`,
+  revealNoMessage: '(ไม่ได้เขียนข้อความ)',
+  revealNoPairMsg: 'รอบนี้ไม่ได้คู่',
+  revealNoPairHint: '(จำนวนพี่กับน้องไม่เท่ากัน)',
+  revealScanning: 'กำลังสแกน...',
+  revealScanned: 'สามารถกลับมาดูใหม่ได้หากลืม',
+
+  // Hints
+  hintsTitleAuthor: 'คำใบ้ที่ให้น้อง',
+  hintsTitleAuthorFor: (name) => `คำใบ้ที่ให้ ${name}`,
+  hintsTitleViewer: 'คำใบ้จากพี่',
+  hintsEmptyAuthor: 'ยังไม่ได้ให้คำใบ้น้อง — เพิ่มได้เลย',
+  hintsEmptyViewer: 'พี่ยังไม่ให้คำใบ้',
+  hintsPlaceholder: 'พิมพ์คำใบ้...',
+  btnAddHint: '+ เพิ่ม',
+  errHintEmpty: 'พิมพ์คำใบ้ก่อน',
+  notifyNewHints: (n) => `✨ พี่ให้คำใบ้ใหม่ ${n} อัน`,
+
+  // Admin
+  adminTitle: 'Admin Panel',
+  adminStatusRandomized: (d) => `สุ่มเมื่อ ${d}`,
+  adminStatusNotRandomized: 'ยังไม่ได้เริ่มการจับคู่',
+  statSeniorLabel: 'พี่',
+  statJuniorLabel: 'น้อง',
+  statPairLabel: 'คู่',
+  adminListHeader: 'รายชื่อ',
+  adminEmpty: 'ยังไม่มีคนลงทะเบียน',
+  btnRandomize: 'สุ่มจับคู่',
+  btnRerandomize: 'สุ่มใหม่',
+  btnResetMatches: 'ล้างผลการจับคู่',
+  btnResetAll: 'ล้างข้อมูลทั้งหมด',
+  errInsufficient: 'ต้องมีทั้งพี่และน้องอย่างน้อย 1 คน',
+  randomizeConfirm: (act) => `${act}?`,
+  randomizeConfirmText: (n, w) => `จะจับคู่ ${n} น้อง${w}`,
+  randomizeWarn: (s, j, unmatched) => {
+    const head = `\n(พี่ ${s} vs น้อง ${j}`;
+    if (j > s) {
+      const extra = Math.min(j, s * 2) - s;
+      const tail = unmatched > 0 ? ` — น้องเหลือ ${unmatched} คนไม่ได้พี่)` : `)`;
+      return `${head} — พี่ ${extra} คนจะได้น้อง 2 คน${tail}`;
+    }
+    return `${head} — พี่ ${unmatched} คนจะไม่ได้น้อง)`;
+  },
+  okRandomized: 'สุ่มการจับคู่แล้ว',
+  errRandomizeFail: (m) => 'สุ่มล้มเหลว: ' + m,
+  resetMatchesConfirm: 'ล้างผลการจับคู่ไหม?',
+  resetMatchesText: 'ข้อมูลที่ลงทะเบียนอยู่แล้วจะไม่หาย',
+  errNotRandomized: 'ยังไม่ได้สุ่ม',
+  okResetMatches: 'ล้างผลสุ่มแล้ว',
+  errFail: (m) => 'ล้มเหลว: ' + m,
+  resetAllConfirm: 'ล้างทุกอย่างไหม?',
+  resetAllText: 'ล้างข้อมูลทุกอย่าง รวมถึงผลการจับคู่',
+  okResetAll: 'ล้างข้อมูลสำเร็จ',
+  delChipConfirm: (n) => `ลบ "${n}"?`,
+  delChipText: 'จะลบบัญชีและข้อความ',
+  udSectionUser: 'ผู้ใช้',
+  udSectionPartner: 'คู่',
+  udPartnerArrow: 'จับคู่กับ',
+  udNotRandomized: 'ยังไม่ได้สุ่ม',
+  udNoPartner: 'ไม่ได้คู่ในรอบนี้',
+  udNoMessage: '(ไม่มีข้อความ)',
+  btnClose: 'ปิด',
+
+  // Auth modal
+  authTitle: 'Admin Access',
+  authDesc: 'ใส่ email + password ของ admin',
+  authEmailLabel: 'Email',
+  authPwdLabel: 'Password',
+  btnAuthGo: 'เข้าสู่ระบบ',
+  errAuthWrong: 'email หรือ password ผิด',
+  errAuthNotAdmin: 'บัญชีนี้ไม่ใช่ admin',
+  errAuthNetwork: 'เชื่อมต่อไม่ได้ ลองอีกครั้ง',
+  okAdminSignedOut: 'ออกจากระบบ admin แล้ว',
+  btnAdminSignout: 'ออกจากระบบ',
+
+  // Confirm modal
+  btnConfirm: 'ยืนยัน',
+
+  // Logout
+  logoutConfirm: 'Logout',
+  logoutText: 'ยืนยันการ Logout ไหม?',
+  okLogout: 'Logout สำเร็จ',
+
+  // Admin link
+  adminLinkLabel: '⚙ Admin',
+  adminLinkClose: '✕ ปิด Admin',
+
+  // Misc errors
+  errFirebaseConnect: (m) => 'เชื่อมต่อ Firebase ไม่ได้: ' + m + '\n\nตรวจสอบ Firestore Rules และ config',
+};
+// ════════════════════════════════════════════════════════════════
+
+const NEEDS_CONFIG = FIREBASE_CONFIG.apiKey.startsWith('PASTE_') || FIREBASE_CONFIG.apiKey === '';
+
+const $ = id => document.getElementById(id);
+
+// Apply text from TEXT object to all elements with data-text / data-placeholder
+const applyText = () => {
+  document.title = TEXT.pageTitle;
+  document.querySelectorAll('[data-text]').forEach(el => {
+    const key = el.dataset.text;
+    const v = TEXT[key];
+    if (typeof v === 'string') el.textContent = v;
+  });
+  document.querySelectorAll('[data-placeholder]').forEach(el => {
+    const key = el.dataset.placeholder;
+    const v = TEXT[key];
+    if (typeof v === 'string') el.placeholder = v;
+  });
+};
+applyText();
+
+/* ── Rotating tips on home ── */
+(() => {
+  const tipEl = document.getElementById('home-tip');
+  const tips = TEXT.homeTips || [];
+  if (!tipEl || tips.length === 0) return;
+  let idx = Math.floor(Math.random() * tips.length);
+  tipEl.textContent = tips[idx];
+  if (tips.length < 2) return;
+  setInterval(() => {
+    tipEl.style.opacity = '0';
+    setTimeout(() => {
+      idx = (idx + 1) % tips.length;
+      tipEl.textContent = tips[idx];
+      tipEl.style.opacity = '';
+    }, 350);
+  }, 10000);
+})();
+
+/* ── Lite mode detection (mobile / low-end) ── */
+const isLite = (() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+  if (window.matchMedia('(pointer: coarse)').matches) return true;
+  if (window.innerWidth <= 768) return true;
+  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) return true;
+  if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) return true;
+  return false;
+})();
+if (isLite) document.body.classList.add('lite');
+
+/* ── Background visuals ── */
+const bg = $('bg');
+const layerFar = $('layer-far'), layerMid = $('layer-mid'), layerNear = $('layer-near');
+const colorRoll = () => { const r = Math.random(); return r < 0.66 ? '' : r < 0.84 ? ' blue' : r < 0.95 ? ' gold' : ' red'; };
+const STAR_MULT = isLite ? 0.5 : 1;
+const layerSpec = [
+  { el: layerFar,  count: Math.round(380 * STAR_MULT), sMin: 0.6, sMax: 1.5, oMin: 0.4,  oMax: 0.85, tMin: 4, tMax: 9, brightChance: 0.01, pulseChance: 0.04 },
+  { el: layerMid,  count: Math.round(220 * STAR_MULT), sMin: 1.1, sMax: 2.4, oMin: 0.55, oMax: 0.95, tMin: 3, tMax: 7, brightChance: 0.08, pulseChance: 0.12 },
+  { el: layerNear, count: Math.round(95  * STAR_MULT), sMin: 1.8, sMax: 3.8, oMin: 0.7,  oMax: 1.0,  tMin: 2.5, tMax: 6, brightChance: 0.45, pulseChance: 0.28 },
+];
+for (const L of layerSpec) {
+  for (let i = 0; i < L.count; i++) {
+    const s = document.createElement('div');
+    let cls = 'star' + colorRoll();
+    if (Math.random() < L.pulseChance) cls += ' pulse';
+    if (Math.random() < L.brightChance) cls += ' bright';
+    s.className = cls;
+    const size = L.sMin + Math.random() * (L.sMax - L.sMin);
+    s.style.setProperty('--s', size.toFixed(2) + 'px');
+    s.style.setProperty('--g', (size * 5).toFixed(1) + 'px');
+    s.style.left = (Math.random() * 100).toFixed(2) + '%';
+    s.style.top = (Math.random() * 100).toFixed(2) + '%';
+    s.style.setProperty('--o', (L.oMin + Math.random() * (L.oMax - L.oMin)).toFixed(2));
+    s.style.setProperty('--t', (L.tMin + Math.random() * (L.tMax - L.tMin)).toFixed(2) + 's');
+    s.style.setProperty('--d', (Math.random() * 6).toFixed(2) + 's');
+    L.el.appendChild(s);
+  }
+}
+const DUST_COUNT = isLite ? 0 : 30;
+for (let i = 0; i < DUST_COUNT; i++) {
+  const d = document.createElement('div');
+  d.className = 'dust';
+  d.style.left = (Math.random() * 100).toFixed(2) + '%';
+  d.style.top = (Math.random() * 100).toFixed(2) + '%';
+  d.style.setProperty('--dx', (-150 - Math.random() * 250).toFixed(0) + 'px');
+  d.style.setProperty('--dy', (40 + Math.random() * 120).toFixed(0) + 'px');
+  d.style.setProperty('--t', (35 + Math.random() * 40).toFixed(0) + 's');
+  d.style.setProperty('--d', (-Math.random() * 50).toFixed(1) + 's');
+  bg.appendChild(d);
+}
+function spawnShootingStar() {
+  const s = document.createElement('div');
+  s.className = 'shooting-star';
+  s.style.top = (Math.random() * 60).toFixed(1) + '%';
+  s.style.left = (55 + Math.random() * 35).toFixed(1) + '%';
+  bg.appendChild(s);
+  setTimeout(() => s.remove(), 1800);
+}
+(function loop1(){ setTimeout(()=>{ spawnShootingStar(); loop1(); }, (isLite ? 4500 : 1500) + Math.random()*(isLite ? 6000 : 3000)); })();
+function spawnComet() {
+  const c = document.createElement('div');
+  c.className = 'comet';
+  c.style.top = (Math.random() * 50).toFixed(1) + '%';
+  c.style.left = (70 + Math.random() * 25).toFixed(1) + '%';
+  bg.appendChild(c);
+  setTimeout(() => c.remove(), 3400);
+}
+if (!isLite) (function loop2(){ setTimeout(()=>{ spawnComet(); loop2(); }, 12000 + Math.random()*15000); })();
+
+/* ── Math decorations (สูตร ม.4 สสวท) ── */
+const mathLayer = $('math-layer');
+const MATH_GLYPHS = ['A∪B','A∩B','A−B','A\'','A⊂B','∅','U','|x|','ⁿ√x','√x','f(x)','f⁻¹','f∘g','∀x','∃x','p∧q','p∨q','p→q','p↔q','~p','≡','D(f)','R(f)','(h,k)','F','2a','2b','e=c/a'];
+const MATH_EQUATIONS = [
+  'n(A∪B)=n(A)+n(B)−n(A∩B)',
+  'n(A\')=n(U)−n(A)',
+  '(a+b)²=a²+2ab+b²',
+  '(a−b)²=a²−2ab+b²',
+  'a²−b²=(a−b)(a+b)',
+  'a³+b³=(a+b)(a²−ab+b²)',
+  'a³−b³=(a−b)(a²+ab+b²)',
+  'x=(−b±√(b²−4ac))/2a',
+  'aᵐ·aⁿ=aᵐ⁺ⁿ',
+  '(aᵐ)ⁿ=aᵐⁿ',
+  'aᵐ/ⁿ=ⁿ√aᵐ',
+  'a⁻ⁿ=1/aⁿ',
+  '(a/b)ⁿ=aⁿ/bⁿ',
+  '(f∘g)(x)=f(g(x))',
+  'f(x)=ax+b',
+  '|x|=√x²',
+  'x²+y²=r²',
+  '(x−h)²+(y−k)²=r²',
+  'y=ax²+bx+c',
+  'y²=4px',
+  'x²=4py',
+  '(y−k)²=4p(x−h)',
+  '(x−h)²=4p(y−k)',
+  'x²/a²+y²/b²=1',
+  '(x−h)²/a²+(y−k)²/b²=1',
+  'x²/a²−y²/b²=1',
+  '(x−h)²/a²−(y−k)²/b²=1',
+  'c²=a²−b²',
+  'c²=a²+b²',
+];
+const MATH_COLOR_CLASSES = ['','cyan','violet'];
+const MATH_COUNT = isLite ? 5 : 14;
+for (let i = 0; i < MATH_COUNT; i++) {
+  const g = document.createElement('div');
+  const isEqn = Math.random() < 0.5;
+  const text = isEqn
+    ? MATH_EQUATIONS[Math.floor(Math.random() * MATH_EQUATIONS.length)]
+    : MATH_GLYPHS[Math.floor(Math.random() * MATH_GLYPHS.length)];
+  const colorCls = MATH_COLOR_CLASSES[Math.floor(Math.random() * MATH_COLOR_CLASSES.length)];
+  g.className = 'math-glyph' + (colorCls ? ' ' + colorCls : '');
+  g.textContent = text;
+  // Bias position to outer 26% on each side so center stays clear for forms
+  const leftPct = Math.random() < 0.5 ? Math.random() * 26 : 74 + Math.random() * 26;
+  g.style.left = leftPct.toFixed(1) + '%';
+  g.style.top = (Math.random() * 100).toFixed(1) + '%';
+  const size = isEqn ? (0.85 + Math.random() * 0.5) : (1.2 + Math.random() * 1.8);
+  g.style.fontSize = size.toFixed(2) + 'rem';
+  g.style.setProperty('--t', (50 + Math.random() * 70).toFixed(0) + 's');
+  g.style.setProperty('--d', (-Math.random() * 40).toFixed(1) + 's');
+  mathLayer.appendChild(g);
+}
+
+/* ── Interactive effects ── */
+function clickBurst(x, y) {
+  const burst = document.createElement('div');
+  burst.className = 'click-burst';
+  burst.style.left = x + 'px';
+  burst.style.top = y + 'px';
+  const count = isLite ? 5 : 9;
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('span');
+    const angle = (i / count) * Math.PI * 2 + Math.random() * 0.4;
+    const dist = 28 + Math.random() * 28;
+    p.style.setProperty('--dx', (Math.cos(angle) * dist).toFixed(0) + 'px');
+    p.style.setProperty('--dy', (Math.sin(angle) * dist).toFixed(0) + 'px');
+    p.style.animationDelay = (Math.random() * 0.04) + 's';
+    p.style.width = p.style.height = (3 + Math.random() * 5).toFixed(1) + 'px';
+    burst.appendChild(p);
+  }
+  document.body.appendChild(burst);
+  setTimeout(() => burst.remove(), 800);
+}
+
+document.addEventListener('click', e => {
+  const btn = e.target.closest('button, .role-card, .name-btn, .user-chip .x');
+  if (btn && !btn.disabled) clickBurst(e.clientX, e.clientY);
+});
+
+if (!isLite) {
+  const TRAIL_POOL_SIZE = 12;
+  const trailPool = [];
+  for (let i = 0; i < TRAIL_POOL_SIZE; i++) {
+    const t = document.createElement('div');
+    t.className = 'trail';
+    t.style.animationName = 'none';
+    document.body.appendChild(t);
+    trailPool.push(t);
+  }
+  let trailIdx = 0;
+  let lastTrail = 0;
+  document.addEventListener('pointermove', e => {
+    const now = performance.now();
+    if (now - lastTrail < 90) return;
+    lastTrail = now;
+    const t = trailPool[trailIdx];
+    trailIdx = (trailIdx + 1) % TRAIL_POOL_SIZE;
+    t.style.left = e.clientX + 'px';
+    t.style.top = e.clientY + 'px';
+    t.style.animationName = 'none';
+    void t.offsetWidth;
+    t.style.animationName = '';
+  }, { passive: true });
+}
+
+const CONFETTI_COLORS = ['#e6c97a', '#cfe1ff', '#ffb47a', '#a29bfe', '#c9a961', '#ffffff'];
+function confetti(count) {
+  const N = count || (isLite ? 30 : 70);
+  for (let i = 0; i < N; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti';
+    c.style.background = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+    c.style.left = (Math.random() * 100).toFixed(1) + '%';
+    const dur = (2 + Math.random() * 2.2);
+    c.style.setProperty('--dur', dur.toFixed(2) + 's');
+    c.style.setProperty('--rot', (360 + Math.random() * 720).toFixed(0) + 'deg');
+    c.style.animationDelay = (Math.random() * 0.5).toFixed(2) + 's';
+    if (Math.random() < 0.3) c.style.borderRadius = '50%';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), (dur + 0.6) * 1000);
+  }
+}
+
+function attachTypingEffect(el) {
+  let glowTimer = null;
+  el.addEventListener('input', () => {
+    el.classList.remove('typing');
+    void el.offsetWidth;
+    el.classList.add('typing');
+    clearTimeout(glowTimer);
+    glowTimer = setTimeout(() => el.classList.remove('typing'), 500);
+  });
+}
+
+document.querySelectorAll('input[type="text"], input[type="password"], textarea').forEach(attachTypingEffect);
+
+// Smooth count-up animation for numbers
+function animateNumber(el, to, dur) {
+  const from = parseInt(el.textContent) || 0;
+  if (from === to) { el.textContent = to; return; }
+  const D = dur || 600;
+  const t0 = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - t0) / D);
+    const eased = 1 - Math.pow(1 - t, 3);
+    el.textContent = Math.round(from + (to - from) * eased);
+    if (t < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ── Screens ── */
+const screens = {
+  config: $('screen-config'),
+  home: $('screen-home'),
+  register: $('screen-register'),
+  registerPin: $('screen-register-pin'),
+  edit: $('screen-edit'),
+  changePin: $('screen-change-pin'),
+  reveal: $('screen-reveal'),
+  admin: $('screen-admin'),
+};
+const adminLink = $('admin-link');
+let currentScreen = null;
+
+const setScreen = name => {
+  currentScreen = name;
+  Object.entries(screens).forEach(([k, el]) => el.classList.toggle('hidden', k !== name));
+  adminLink.classList.toggle('hidden', name === 'config');
+  adminLink.textContent = name === 'admin' ? TEXT.adminLinkClose : TEXT.adminLinkLabel;
+  if (name === 'home') updateHomeStatus();
+  if (name === 'admin') renderAdmin();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+if (NEEDS_CONFIG) {
+  setScreen('config');
+  $('sync-pill').classList.add('error');
+  $('sync-text').textContent = TEXT.syncNotConfigured;
+  throw new Error('Firebase config missing');
+}
+
+/* ── Firebase init ── */
+const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js");
+const { getFirestore, doc, getDoc, setDoc, onSnapshot, runTransaction } =
+  await import("https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js");
+const { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } =
+  await import("https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js");
+
+const fb = initializeApp(FIREBASE_CONFIG);
+const db = getFirestore(fb);
+const auth = getAuth(fb);
+const docRef = doc(db, "rahut-match", "data");
+
+let _adminUser = null;
+const isAdminAuthed = () => !!_adminUser;
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { _adminUser = null; return; }
+  try {
+    const adminDoc = await getDoc(doc(db, "admins", user.uid));
+    if (adminDoc.exists()) _adminUser = user;
+    else { _adminUser = null; await signOut(auth); }
+  } catch { _adminUser = null; }
+});
+
+/* ── Data + sync ── */
+const defaultData = () => ({ users: [], matches: {}, randomizedAt: null, registrationLocked: false });
+let data = defaultData();
+const syncPill = $('sync-pill');
+const syncTextEl = $('sync-text');
+
+const setSync = (state, msg) => {
+  syncPill.classList.remove('busy', 'error');
+  if (state !== 'idle') syncPill.classList.add(state);
+  syncTextEl.textContent = msg || (state === 'busy' ? TEXT.syncBusy : state === 'error' ? TEXT.syncError : TEXT.syncOnline);
+};
+
+async function save() {
+  setSync('busy', TEXT.syncSaving);
+  try { await setDoc(docRef, data); setSync('idle'); }
+  catch (e) { setSync('error', TEXT.syncSaveFailed); throw e; }
+}
+
+class TxnAbort extends Error { constructor(uiMsg) { super(uiMsg); this.uiAbort = true; } }
+
+async function txnUpdate(mutator) {
+  setSync('busy', TEXT.syncSaving);
+  try {
+    const committed = await runTransaction(db, async (tx) => {
+      const snap = await tx.get(docRef);
+      const current = snap.exists() ? Object.assign(defaultData(), snap.data()) : defaultData();
+      const next = await mutator(current);
+      tx.set(docRef, next);
+      return next;
+    });
+    data = committed;
+    setSync('idle');
+    return committed;
+  } catch (e) {
+    setSync('error', TEXT.syncSaveFailed);
+    throw e;
+  }
+}
+
+try {
+  const snap = await getDoc(docRef);
+  if (snap.exists()) data = Object.assign(defaultData(), snap.data());
+  else await setDoc(docRef, data);
+  setSync('idle');
+} catch (e) {
+  console.error(e);
+  setSync('error', TEXT.syncConnectFailed);
+  alert(TEXT.errFirebaseConnect(e.message));
+}
+
+onSnapshot(docRef, (snap) => {
+  if (snap.exists()) {
+    data = Object.assign(defaultData(), snap.data());
+    onDataChanged();
+  }
+});
+
+const onDataChanged = () => {
+  if (currentScreen === 'home') updateHomeStatus();
+  if (currentScreen === 'admin') renderAdmin();
+  if (currentScreen === 'reveal' && typeof renderHintsPanel === 'function') renderHintsPanel();
+};
+
+/* ── Helpers ── */
+const shuffle = arr => {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+const findUserByName = name => {
+  const n = name.trim().toLowerCase();
+  return data.users.find(u => u.name.toLowerCase() === n);
+};
+const findUserById = id => data.users.find(u => u.id === id);
+const getPartnerIds = id => {
+  const v = data.matches[id];
+  if (v == null) return [];
+  return Array.isArray(v) ? v.slice() : [v];
+};
+const getPartnerIdsFrom = (matches, id) => {
+  const v = matches[id];
+  if (v == null) return [];
+  return Array.isArray(v) ? v.slice() : [v];
+};
+const getHintsForJunior = (senior, juniorId) => {
+  if (!senior) return [];
+  const byJ = senior.hintsByJunior;
+  if (byJ && Array.isArray(byJ[juniorId])) return byJ[juniorId];
+  const partners = getPartnerIds(senior.id);
+  if (partners.length <= 1 && Array.isArray(senior.hints)) return senior.hints;
+  return [];
+};
+const newId = () => 'u' + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+const PIN_SALT = 'rahut-match-2569';
+const hashPin = async (pin) => {
+  const data = new TextEncoder().encode(PIN_SALT + ':' + pin);
+  const buf = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+};
+const isValidPin = (pin) => /^\d{4,6}$/.test(pin);
+const roleLabel = r => r === 'senior' ? TEXT.roleSenior : TEXT.roleJunior;
+const isRandomized = () => !!data.randomizedAt;
+const isRegistrationLocked = () => data.registrationLocked === true || isRandomized();
+const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ── Song / streaming-platform helpers ── */
+const ALLOWED_HOSTS = {
+  'open.spotify.com': 'spotify',
+  'spotify.link': 'spotify',
+  'youtube.com': 'youtube',
+  'www.youtube.com': 'youtube',
+  'm.youtube.com': 'youtube',
+  'youtu.be': 'youtube',
+  'music.youtube.com': 'youtube-music',
+  'soundcloud.com': 'soundcloud',
+  'm.soundcloud.com': 'soundcloud',
+  'on.soundcloud.com': 'soundcloud',
+  'music.apple.com': 'apple-music',
+  'tidal.com': 'tidal',
+  'listen.tidal.com': 'tidal',
+};
+const PLATFORM_NAMES = {
+  spotify: 'Spotify',
+  youtube: 'YouTube',
+  'youtube-music': 'YouTube Music',
+  soundcloud: 'SoundCloud',
+  'apple-music': 'Apple Music',
+  tidal: 'Tidal',
+};
+const PLATFORM_BRAND = {
+  spotify: '#1db954',
+  youtube: '#ff0000',
+  'youtube-music': '#ff0000',
+  soundcloud: '#ff5500',
+  'apple-music': '#fa233b',
+  tidal: '#000000',
+};
+const PLATFORM_ICON_PATH = {
+  spotify: 'M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.84-.18-.94-.6-.122-.418.18-.842.6-.94 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.282 1.121zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.42 1.56-.299.421-1.02.599-1.559.3z',
+  youtube: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z',
+  'youtube-music': 'M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 4.8c4 0 7.2 3.2 7.2 7.2S16 19.2 12 19.2 4.8 16 4.8 12 8 4.8 12 4.8zm-2 3.6v7.2L16 12l-6-3.6z',
+  soundcloud: 'M7 17.939h-1v-8.068c.308-.231.639-.429 1-.566zm3 0h1v-9.224c-.229-.265-.56-.466-1-.606zm-2 0h1v-9.07c-.317-.024-.658-.024-1 0zm-4 0h1v-7.541c-.375.087-.715.225-1 .411zm-3-3.962l-1 .378v3.219l1 .365zm22.485-2.057c-.448 0-.886.069-1.292.205-.31-3.094-2.901-5.515-6.063-5.515-.745 0-1.473.139-2.13.396v10.539c.13.061.4.06.55.06h8.5c2.214 0 3.95-1.799 3.95-4.06 0-2.235-1.81-4.05-4.025-4.05zm-19.485-.044l-1 .583v2.566l1 .54z',
+  'apple-music': 'M23.997 6.124c0-.738-.065-1.47-.24-2.19-.317-1.31-1.062-2.31-2.18-3.043C21.003.517 20.373.285 19.7.164c-.517-.093-1.038-.135-1.564-.15h-.117a3.42 3.42 0 0 0-.153-.014h-11.6c-.057 0-.114.005-.17.014-.12.005-.24.014-.36.022-.694.038-1.378.105-2.022.27C2.39.49 1.426 1.094.683 2.115.234 2.728-.022 3.42 0 4.197v15.605c.026.797.317 1.49.776 2.115.745 1.018 1.71 1.622 2.927 1.928.65.165 1.34.232 2.034.27.118.008.237.017.355.022.057.01.115.014.17.014h11.6c.05 0 .102-.005.153-.014h.118c.524-.014 1.045-.057 1.564-.15.673-.12 1.302-.353 1.876-.728 1.118-.733 1.864-1.732 2.181-3.043.176-.72.24-1.452.24-2.19V6.124zM7.97 17.71c-1.4 0-2.55-1.118-2.55-2.494a2.546 2.546 0 0 1 2.06-2.498V9.305l9.05-1.846v9.143c0 1.376-1.137 2.493-2.55 2.493-1.4 0-2.55-1.118-2.55-2.494a2.546 2.546 0 0 1 2.06-2.498V11.31L9.83 12.81v4.59c-.067 1.385-1.183 2.483-2.55 2.483-1.4-.18-1.4-1.31-1.4-2.18z',
+  tidal: 'M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996l4.004 4.004 4.004-4.004 4.004 4.004 4.004-4.004 4.004 4.004L24 7.996l-4.004-4.004-4.004 4.004zM8.008 12l4.004 4.004L8.008 20.008 4.004 16.004z',
+};
+const parsePlatform = (url) => {
+  if (!url) return null;
+  try {
+    const u = new URL(url.trim());
+    if (u.protocol !== 'https:' && u.protocol !== 'http:') return null;
+    return ALLOWED_HOSTS[u.hostname.toLowerCase()] || null;
+  } catch { return null; }
+};
+const platformIconHtml = (platform) => {
+  const path = PLATFORM_ICON_PATH[platform] || '';
+  const brand = PLATFORM_BRAND[platform] || '#444';
+  return `<span class="platform-icon ${platform === 'apple-music' ? 'apple-music' : ''}" style="--brand:${brand}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg></span>`;
+};
+const thumbIconHtml = (platform, thumbnail) => {
+  const brand = PLATFORM_BRAND[platform] || '#444';
+  return `<span class="platform-icon thumb${platform === 'apple-music' ? ' apple-music' : ''}" style="--brand:${brand}"><img src="${escapeHtml(thumbnail)}" loading="lazy" alt="" referrerpolicy="no-referrer" onerror="this.style.display='none'"></span>`;
+};
+const songCardHtml = (song) => {
+  if (!song || !song.url) return '';
+  const platform = parsePlatform(song.url);
+  if (!platform) return '';
+  const platformName = PLATFORM_NAMES[platform];
+  const hasTitle = !!song.title;
+  const title = hasTitle ? escapeHtml(song.title) : escapeHtml(TEXT.songOnPlatform(platformName));
+  const iconHtml = song.thumbnail ? thumbIconHtml(platform, song.thumbnail) : platformIconHtml(platform);
+  return `<a class="song-card" href="${escapeHtml(song.url)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(TEXT.songOnPlatform(platformName))}">${iconHtml}<div class="song-info"><div class="song-title">${title}</div>${hasTitle ? `<div class="song-meta-line">${escapeHtml(platformName)}</div>` : ''}</div><span class="song-arrow">↗</span></a>`;
+};
+const renderSongPreview = (previewEl, url, thumbnail) => {
+  if (!url) { previewEl.classList.add('hidden'); previewEl.innerHTML = ''; return; }
+  const platform = parsePlatform(url);
+  if (platform) {
+    previewEl.classList.remove('hidden', 'invalid');
+    const icon = thumbnail ? thumbIconHtml(platform, thumbnail) : platformIconHtml(platform);
+    previewEl.innerHTML = `${icon}<span class="preview-text">${escapeHtml(TEXT.songPreviewValid(PLATFORM_NAMES[platform]))}</span>`;
+  } else {
+    previewEl.classList.remove('hidden');
+    previewEl.classList.add('invalid');
+    previewEl.innerHTML = `<span class="preview-text">${escapeHtml(TEXT.songPreviewInvalid)}</span>`;
+  }
+};
+// Auto-fetch song metadata via public oEmbed endpoints (no API key, CORS-enabled).
+// Returns { title, artist } or null if platform/endpoint unavailable.
+const fetchSongMeta = async (url, platform, signal) => {
+  let endpoint = null;
+  if (platform === 'spotify') endpoint = `https://open.spotify.com/oembed?url=${encodeURIComponent(url)}`;
+  else if (platform === 'youtube' || platform === 'youtube-music') endpoint = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
+  else if (platform === 'soundcloud') endpoint = `https://soundcloud.com/oembed?format=json&url=${encodeURIComponent(url)}`;
+  else return null;
+  try {
+    const res = await fetch(endpoint, { signal });
+    if (!res.ok) return null;
+    const j = await res.json();
+    return {
+      title: (j.title || '').trim(),
+      artist: (j.author_name || '').trim(),
+      thumbnail: (j.thumbnail_url || '').trim(),
+    };
+  } catch { return null; }
+};
+
+const songFieldHandlers = {};
+const setupSongFields = (prefix) => {
+  const urlInput = $(prefix + '-url');
+  const titleInput = $(prefix + '-title');
+  const thumbnailInput = $(prefix + '-thumbnail');
+  const previewEl = $(prefix + '-preview');
+  let _abort = null;
+  let _lastProcessed = '';
+
+  const process = async () => {
+    const url = urlInput.value.trim();
+    if (url === _lastProcessed) return;
+    _lastProcessed = url;
+    titleInput.value = '';
+    thumbnailInput.value = '';
+
+    if (!url) { previewEl.classList.add('hidden'); previewEl.innerHTML = ''; return; }
+    const platform = parsePlatform(url);
+    if (!platform) {
+      previewEl.classList.remove('hidden');
+      previewEl.classList.add('invalid');
+      previewEl.innerHTML = `<span class="preview-text">${escapeHtml(TEXT.songPreviewInvalid)}</span>`;
+      return;
+    }
+    if (_abort) _abort.abort();
+    _abort = new AbortController();
+    previewEl.classList.remove('hidden', 'invalid');
+    previewEl.innerHTML = `${platformIconHtml(platform)}<span class="preview-text">${escapeHtml(TEXT.songFetching)}</span>`;
+    const meta = await fetchSongMeta(url, platform, _abort.signal);
+    if (urlInput.value.trim() !== url) return;
+    if (meta && meta.title) {
+      titleInput.value = meta.title;
+      if (meta.thumbnail) thumbnailInput.value = meta.thumbnail;
+      const icon = meta.thumbnail ? thumbIconHtml(platform, meta.thumbnail) : platformIconHtml(platform);
+      previewEl.innerHTML = `${icon}<span class="preview-text">${escapeHtml(TEXT.songAutoFetched(PLATFORM_NAMES[platform]))}</span>`;
+    } else {
+      previewEl.innerHTML = `${platformIconHtml(platform)}<span class="preview-text">${escapeHtml(TEXT.songPreviewValid(PLATFORM_NAMES[platform]))}</span>`;
+    }
+  };
+
+  urlInput.addEventListener('paste', () => setTimeout(process, 60));
+  urlInput.addEventListener('change', process);
+
+  songFieldHandlers[prefix] = { syncFromData: (url) => { _lastProcessed = url || ''; } };
+};
+
+const readSongFromForm = (prefix) => {
+  const url = $(prefix + '-url').value.trim();
+  const title = $(prefix + '-title').value.trim();
+  const thumbnail = $(prefix + '-thumbnail').value.trim();
+  if (!url) return { song: null };
+  const platform = parsePlatform(url);
+  if (!platform) throw new TxnAbort(TEXT.errSongUrlInvalid);
+  return { song: { url, title, platform, thumbnail } };
+};
+
+let currentUserId = null;
+const showWarn = (el, msg, isError = false) => {
+  if (!msg) { el.classList.add('hidden'); return; }
+  el.textContent = msg;
+  el.className = 'warning' + (isError ? ' error' : '');
+};
+
+/* ── Home ── */
+const REMEMBER_KEY = 'rahut-match-current-user';
+const homeName = $('home-name');
+const homeGo = $('home-go');
+const homeWarn = $('home-warn');
+const statusText = $('status-text');
+const statusBanner = $('status-banner');
+const welcomePanel = $('welcome-panel');
+const welcomeName = $('welcome-name');
+const welcomeAction = $('welcome-action');
+const loginPanel = $('login-panel');
+
+const getRememberedId = () => localStorage.getItem(REMEMBER_KEY) || null;
+const setRememberedId = id => localStorage.setItem(REMEMBER_KEY, id);
+const clearRemembered = () => localStorage.removeItem(REMEMBER_KEY);
+
+const HINTS_SEEN_KEY = 'rahut-match-hints-seen';
+const getHintsSeenMap = () => { try { return JSON.parse(localStorage.getItem(HINTS_SEEN_KEY) || '{}'); } catch { return {}; } };
+const getHintsSeenFor = (userId) => getHintsSeenMap()[userId] || 0;
+const setHintsSeenFor = (userId, count) => {
+  const m = getHintsSeenMap();
+  m[userId] = count;
+  localStorage.setItem(HINTS_SEEN_KEY, JSON.stringify(m));
+};
+
+const updateHomeStatus = () => {
+  if (isRandomized()) {
+    statusText.textContent = TEXT.statusRandomized;
+    statusBanner.classList.add('live');
+  } else if (data.registrationLocked) {
+    const sCount = data.users.filter(u => u.role === 'senior').length;
+    const jCount = data.users.filter(u => u.role === 'junior').length;
+    statusText.textContent = `${TEXT.statusRegLocked} · พี่ ${sCount} · น้อง ${jCount}`;
+    statusBanner.classList.add('live');
+  } else {
+    const sCount = data.users.filter(u => u.role === 'senior').length;
+    const jCount = data.users.filter(u => u.role === 'junior').length;
+    statusText.textContent = TEXT.statusNotRandomized(data.users.length, sCount, jCount);
+    statusBanner.classList.remove('live');
+  }
+
+  const rememberedId = getRememberedId();
+  const me = rememberedId ? findUserById(rememberedId) : null;
+  if (me) {
+    welcomeName.textContent = `${roleLabel(me.role)}${me.name}`;
+    $('welcome-action-label').textContent = isRandomized() ? TEXT.btnViewMatch : TEXT.btnEdit;
+    $('welcome-delete').classList.toggle('hidden', isRandomized());
+
+    const notifyEl = $('welcome-notify');
+    const badgeEl = $('welcome-action-badge');
+    let unread = 0;
+    if (isRandomized() && me.role === 'junior') {
+      const partnerId = data.matches[me.id];
+      const partner = partnerId ? findUserById(partnerId) : null;
+      if (partner) {
+        const total = getHintsForJunior(partner, me.id).length;
+        const seen = getHintsSeenFor(me.id);
+        unread = Math.max(0, total - seen);
+      }
+    }
+    if (unread > 0) {
+      notifyEl.textContent = TEXT.notifyNewHints(unread);
+      notifyEl.classList.remove('hidden');
+      badgeEl.textContent = String(unread);
+      badgeEl.classList.remove('hidden');
+    } else {
+      notifyEl.classList.add('hidden');
+      badgeEl.classList.add('hidden');
+    }
+
+    welcomePanel.classList.remove('hidden');
+    loginPanel.classList.add('hidden');
+  } else {
+    if (rememberedId) clearRemembered();
+    welcomePanel.classList.add('hidden');
+    loginPanel.classList.remove('hidden');
+  }
+};
+
+welcomeAction.addEventListener('click', () => {
+  const me = findUserById(getRememberedId());
+  if (!me) { clearRemembered(); updateHomeStatus(); return; }
+  currentUserId = me.id;
+  if (isRandomized()) openReveal(me);
+  else openEdit(me);
+});
+
+const handleHomeGo = () => {
+  const name = homeName.value.trim();
+  if (!name) { showWarn(homeWarn, TEXT.errEmptyName, true); return; }
+  showWarn(homeWarn, '');
+  const u = findUserByName(name);
+  if (u) {
+    if (u.pin) {
+      openPinModal(u, async () => {
+        currentUserId = u.id;
+        setRememberedId(u.id);
+        homeName.value = '';
+        setScreen('home');
+      });
+    } else {
+      currentUserId = u.id;
+      setRememberedId(u.id);
+      homeName.value = '';
+      setScreen('home');
+    }
+  } else {
+    if (isRandomized()) { showWarn(homeWarn, TEXT.errCannotRegisterAfter, true); return; }
+    if (isRegistrationLocked()) { showWarn(homeWarn, TEXT.errRegistrationLocked, true); return; }
+    $('reg-name').value = name;
+    openRegister();
+  }
+};
+homeGo.addEventListener('click', handleHomeGo);
+homeName.addEventListener('keydown', e => { if (e.key === 'Enter') handleHomeGo(); });
+
+/* ── Register (step 1: info) ── */
+const regName = $('reg-name');
+const regMsg = $('reg-msg');
+const regNext = $('reg-next');
+const regCancel = $('reg-cancel');
+const regWarn = $('reg-warn');
+
+const openRegister = () => {
+  showWarn(regWarn, '');
+  document.querySelector('input[name="reg-role"][value="senior"]').checked = true;
+  regMsg.value = '';
+  $('reg-song-url').value = '';
+  $('reg-song-title').value = '';
+  $('reg-song-thumbnail').value = '';
+  $('reg-song-preview').classList.add('hidden');
+  $('reg-song-preview').innerHTML = '';
+  songFieldHandlers['reg-song'].syncFromData('');
+  setScreen('register');
+  setTimeout(() => regName.focus(), 80);
+};
+
+setupSongFields('reg-song');
+
+regNext.addEventListener('click', () => {
+  const name = regName.value.trim();
+  if (!name) { showWarn(regWarn, TEXT.errEmptyName, true); return; }
+  if (findUserByName(name)) { showWarn(regWarn, TEXT.errDuplicate, true); return; }
+  if (isRandomized()) { showWarn(regWarn, TEXT.errLocked, true); return; }
+  if (isRegistrationLocked()) { showWarn(regWarn, TEXT.errRegistrationLocked, true); return; }
+  try { readSongFromForm('reg-song'); }
+  catch (e) { if (e.uiAbort) { showWarn(regWarn, e.message, true); return; } throw e; }
+  showWarn(regWarn, '');
+  openRegisterPin();
+});
+
+regCancel.addEventListener('click', () => { homeName.value = ''; setScreen('home'); });
+
+/* ── Register (step 2: PIN numpad) ── */
+const regSave = $('reg-save');
+const regPinBack = $('reg-pin-back');
+const regPinWarn = $('reg-pin-warn');
+const regPinDisplay = $('reg-pin-display');
+const regPinStageLabel = $('reg-pin-stage-label');
+let _regPinStage = 'enter';
+let _regPinFirst = '';
+let _regPinCurrent = '';
+
+let _regPinPrevLen = 0;
+const renderRegPinDisplay = () => {
+  const dots = regPinDisplay.querySelectorAll('.pin-dot');
+  const len = _regPinCurrent.length;
+  const justAdded = len > _regPinPrevLen ? len - 1 : -1;
+  dots.forEach((d, i) => {
+    d.classList.toggle('filled', i < len);
+    d.classList.toggle('just-filled', i === justAdded);
+  });
+  regPinDisplay.classList.toggle('complete', len >= 4);
+  _regPinPrevLen = len;
+};
+
+const shakeRegPinDisplay = () => {
+  regPinDisplay.classList.add('shake');
+  setTimeout(() => regPinDisplay.classList.remove('shake'), 400);
+};
+
+const setRegPinStage = (stage) => {
+  _regPinStage = stage;
+  _regPinCurrent = '';
+  showWarn(regPinWarn, '');
+  regPinStageLabel.textContent = stage === 'enter' ? TEXT.registerPinStageEnter : TEXT.registerPinStageConfirm;
+  regSave.textContent = stage === 'enter' ? TEXT.btnNext : TEXT.btnSave;
+  renderRegPinDisplay();
+};
+
+const openRegisterPin = () => {
+  _regPinFirst = '';
+  setRegPinStage('enter');
+  setScreen('registerPin');
+};
+
+regPinBack.addEventListener('click', () => {
+  if (_regPinStage === 'confirm') setRegPinStage('enter');
+  else setScreen('register');
+});
+
+document.querySelectorAll('#reg-pin-numpad .numpad-btn[data-digit]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (_regPinCurrent.length >= 6) return;
+    _regPinCurrent += btn.dataset.digit;
+    renderRegPinDisplay();
+  });
+});
+$('reg-pin-clear').addEventListener('click', () => { _regPinCurrent = ''; renderRegPinDisplay(); });
+$('reg-pin-backspace').addEventListener('click', () => { _regPinCurrent = _regPinCurrent.slice(0, -1); renderRegPinDisplay(); });
+
+regSave.addEventListener('click', async () => {
+  if (_regPinStage === 'enter') {
+    if (!isValidPin(_regPinCurrent)) { showWarn(regPinWarn, TEXT.errPinInvalid, true); shakeRegPinDisplay(); return; }
+    _regPinFirst = _regPinCurrent;
+    setRegPinStage('confirm');
+    return;
+  }
+  if (_regPinCurrent !== _regPinFirst) {
+    showWarn(regPinWarn, TEXT.errPinMismatch, true);
+    shakeRegPinDisplay();
+    _regPinCurrent = '';
+    setTimeout(renderRegPinDisplay, 400);
+    return;
+  }
+
+  const name = regName.value.trim();
+  const role = document.querySelector('input[name="reg-role"]:checked').value;
+  const message = regMsg.value.trim();
+
+  showWarn(regPinWarn, TEXT.msgSaving);
+  try {
+    const { song } = readSongFromForm('reg-song');
+    const pinHash = await hashPin(_regPinFirst);
+    const user = { id: newId(), name, role, message, song, pin: pinHash, createdAt: Date.now() };
+    const lname = name.toLowerCase();
+    await txnUpdate(curr => {
+      if (curr.randomizedAt) throw new TxnAbort(TEXT.errLocked);
+      if (curr.registrationLocked) throw new TxnAbort(TEXT.errRegistrationLocked);
+      if (curr.users.some(u => u.name.toLowerCase() === lname)) throw new TxnAbort(TEXT.errDuplicate);
+      curr.users.push(user);
+      return curr;
+    });
+    currentUserId = user.id;
+    setRememberedId(user.id);
+    homeName.value = '';
+    _regPinFirst = '';
+    _regPinCurrent = '';
+    setScreen('home');
+    confetti();
+    flash(TEXT.okRegistered(roleLabel(role), name));
+  } catch (e) {
+    showWarn(regPinWarn, e.uiAbort ? e.message : TEXT.errSaveFail(e.message), true);
+  }
+});
+
+window.addEventListener('keydown', e => {
+  if (currentScreen !== 'registerPin') return;
+  if (/^\d$/.test(e.key)) { if (_regPinCurrent.length < 6) { _regPinCurrent += e.key; renderRegPinDisplay(); } }
+  else if (e.key === 'Backspace') { _regPinCurrent = _regPinCurrent.slice(0, -1); renderRegPinDisplay(); }
+  else if (e.key === 'Enter') regSave.click();
+});
+
+/* ── Edit ── */
+const editName = $('edit-name');
+const editMsg = $('edit-msg');
+const editRoleLabel = $('edit-role-label');
+const editSave = $('edit-save');
+const editBack = $('edit-back');
+const editWarn = $('edit-warn');
+
+const openEdit = (u) => {
+  currentUserId = u.id;
+  showWarn(editWarn, '');
+  editRoleLabel.textContent = `${roleLabel(u.role)}${u.name}`;
+  editName.value = u.name;
+  editMsg.value = u.message || '';
+  const s = u.song || {};
+  $('edit-song-url').value = s.url || '';
+  $('edit-song-title').value = s.title || '';
+  $('edit-song-thumbnail').value = s.thumbnail || '';
+  renderSongPreview($('edit-song-preview'), s.url || '', s.thumbnail || '');
+  songFieldHandlers['edit-song'].syncFromData(s.url || '');
+  setScreen('edit');
+};
+
+setupSongFields('edit-song');
+
+editSave.addEventListener('click', async () => {
+  const name = editName.value.trim();
+  if (!name) { showWarn(editWarn, TEXT.errEmptyName, true); return; }
+  const newMsg = editMsg.value.trim();
+  const lname = name.toLowerCase();
+  let newSong;
+  try { newSong = readSongFromForm('edit-song').song; }
+  catch (e) { showWarn(editWarn, e.uiAbort ? e.message : TEXT.errSaveFail(e.message), true); return; }
+  showWarn(editWarn, TEXT.msgSaving);
+  try {
+    await txnUpdate(curr => {
+      if (curr.randomizedAt) throw new TxnAbort(TEXT.errEditLocked);
+      const u = curr.users.find(x => x.id === currentUserId);
+      if (!u) throw new TxnAbort(TEXT.errNotFound);
+      const dup = curr.users.find(x => x.name.toLowerCase() === lname);
+      if (dup && dup.id !== u.id) throw new TxnAbort(TEXT.errDuplicate);
+      u.name = name;
+      u.message = newMsg;
+      u.song = newSong;
+      return curr;
+    });
+    homeName.value = '';
+    setScreen('home');
+    flash(TEXT.okSaved);
+  } catch (e) { showWarn(editWarn, e.uiAbort ? e.message : TEXT.errSaveFail(e.message), true); }
+});
+
+editBack.addEventListener('click', () => { homeName.value = ''; setScreen('home'); });
+
+/* ── Change PIN ── */
+const cpinDisplay = $('cpin-display');
+const cpinStageLabel = $('cpin-stage-label');
+const cpinNext = $('cpin-next');
+const cpinBack = $('cpin-back');
+const cpinWarn = $('cpin-warn');
+const editChangePinBtn = $('edit-change-pin');
+let _cpinStage = 'current';
+let _cpinNew = '';
+let _cpinCurrent = '';
+
+let _cpinPrevLen = 0;
+const renderCpinDisplay = () => {
+  const dots = cpinDisplay.querySelectorAll('.pin-dot');
+  const len = _cpinCurrent.length;
+  const justAdded = len > _cpinPrevLen ? len - 1 : -1;
+  dots.forEach((d, i) => {
+    d.classList.toggle('filled', i < len);
+    d.classList.toggle('just-filled', i === justAdded);
+  });
+  cpinDisplay.classList.toggle('complete', len >= 4);
+  _cpinPrevLen = len;
+};
+
+const shakeCpinDisplay = () => {
+  cpinDisplay.classList.add('shake');
+  setTimeout(() => cpinDisplay.classList.remove('shake'), 400);
+};
+
+const setCpinStage = (stage) => {
+  _cpinStage = stage;
+  _cpinCurrent = '';
+  showWarn(cpinWarn, '');
+  if (stage === 'current') { cpinStageLabel.textContent = TEXT.changePinStageCurrent; cpinNext.textContent = TEXT.btnNext; }
+  else if (stage === 'new') { cpinStageLabel.textContent = TEXT.changePinStageNew; cpinNext.textContent = TEXT.btnNext; }
+  else { cpinStageLabel.textContent = TEXT.changePinStageConfirm; cpinNext.textContent = TEXT.btnSave; }
+  renderCpinDisplay();
+};
+
+const openChangePin = () => {
+  const u = findUserById(currentUserId);
+  if (!u) { flash(TEXT.errPinNoAccount, true); return; }
+  _cpinNew = '';
+  setCpinStage(u.pin ? 'current' : 'new');
+  setScreen('changePin');
+};
+
+editChangePinBtn.addEventListener('click', openChangePin);
+
+cpinBack.addEventListener('click', () => {
+  const u = findUserById(currentUserId);
+  if (_cpinStage === 'confirm') setCpinStage('new');
+  else if (_cpinStage === 'new' && u && u.pin) setCpinStage('current');
+  else setScreen('edit');
+});
+
+document.querySelectorAll('#cpin-numpad .numpad-btn[data-digit]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (_cpinCurrent.length >= 6) return;
+    _cpinCurrent += btn.dataset.digit;
+    renderCpinDisplay();
+  });
+});
+$('cpin-clear').addEventListener('click', () => { _cpinCurrent = ''; renderCpinDisplay(); });
+$('cpin-backspace').addEventListener('click', () => { _cpinCurrent = _cpinCurrent.slice(0, -1); renderCpinDisplay(); });
+
+cpinNext.addEventListener('click', async () => {
+  if (_cpinStage === 'current') {
+    const u = findUserById(currentUserId);
+    if (!u) { flash(TEXT.errPinNoAccount, true); setScreen('home'); return; }
+    const h = await hashPin(_cpinCurrent);
+    if (h !== u.pin) { showWarn(cpinWarn, TEXT.errPinWrong, true); shakeCpinDisplay(); _cpinCurrent = ''; setTimeout(renderCpinDisplay, 400); return; }
+    setCpinStage('new');
+    return;
+  }
+  if (_cpinStage === 'new') {
+    if (!isValidPin(_cpinCurrent)) { showWarn(cpinWarn, TEXT.errPinInvalid, true); shakeCpinDisplay(); return; }
+    _cpinNew = _cpinCurrent;
+    setCpinStage('confirm');
+    return;
+  }
+  if (_cpinCurrent !== _cpinNew) {
+    showWarn(cpinWarn, TEXT.errPinMismatch, true);
+    shakeCpinDisplay();
+    _cpinCurrent = '';
+    setTimeout(renderCpinDisplay, 400);
+    return;
+  }
+
+  showWarn(cpinWarn, TEXT.msgSaving);
+  try {
+    const newPinHash = await hashPin(_cpinNew);
+    await txnUpdate(curr => {
+      const u = curr.users.find(x => x.id === currentUserId);
+      if (!u) throw new TxnAbort(TEXT.errPinNoAccount);
+      u.pin = newPinHash;
+      return curr;
+    });
+    _cpinNew = '';
+    _cpinCurrent = '';
+    setScreen('edit');
+    flash(TEXT.okPinChanged);
+  } catch (e) { showWarn(cpinWarn, e.uiAbort ? e.message : TEXT.errPinChangeSaveFail(e.message), true); }
+});
+
+window.addEventListener('keydown', e => {
+  if (currentScreen !== 'changePin') return;
+  if (/^\d$/.test(e.key)) { if (_cpinCurrent.length < 6) { _cpinCurrent += e.key; renderCpinDisplay(); } }
+  else if (e.key === 'Backspace') { _cpinCurrent = _cpinCurrent.slice(0, -1); renderCpinDisplay(); }
+  else if (e.key === 'Enter') cpinNext.click();
+});
+
+const deleteAccount = (userId) => {
+  const u = findUserById(userId);
+  if (!u) return;
+  if (isRandomized()) { flash(TEXT.errDeleteAfterRandomize, true); return; }
+  confirmModal(TEXT.delConfirmTitle(u.name), TEXT.delConfirmText, async () => {
+    try {
+      await txnUpdate(curr => {
+        if (curr.randomizedAt) throw new TxnAbort(TEXT.errDeleteAfterRandomize);
+        curr.users = curr.users.filter(x => x.id !== userId);
+        delete curr.matches[userId];
+        for (const k of Object.keys(curr.matches)) {
+          if (curr.matches[k] === userId) delete curr.matches[k];
+        }
+        return curr;
+      });
+      clearRemembered();
+      currentUserId = null;
+      homeName.value = '';
+      setScreen('home');
+      flash(TEXT.okDeleted);
+    } catch (e) { flash(TEXT.errDelFail(e.message), true); }
+  });
+};
+
+const welcomeDelete = $('welcome-delete');
+welcomeDelete.addEventListener('click', () => {
+  const id = getRememberedId();
+  if (id) deleteAccount(id);
+});
+
+$('welcome-switch').addEventListener('click', () => {
+  confirmModal(TEXT.logoutConfirm, TEXT.logoutText, () => {
+    clearRemembered();
+    currentUserId = null;
+    homeName.value = '';
+    updateHomeStatus();
+    flash(TEXT.okLogout);
+  });
+});
+
+/* ── Reveal (light beam scan) ── */
+const revealStage = $('reveal-stage');
+const hintsPanel = $('hints-panel');
+const revealTitle = $('reveal-title');
+const revealSelfLabel = $('reveal-self-label');
+const revealHint = $('reveal-hint');
+const revealBack = $('reveal-back');
+let scanRaf = null;
+
+const openReveal = (u) => {
+  currentUserId = u.id;
+  revealSelfLabel.textContent = '';
+  revealSelfLabel.style.display = 'none';
+  const partnerIds = getPartnerIds(u.id);
+  const partners = partnerIds.map(findUserById).filter(Boolean);
+
+  revealStage.classList.remove('done', 'no-partner');
+  revealStage.style.removeProperty('--scan');
+  revealHint.textContent = TEXT.revealScanning;
+
+  if (partners.length === 0) {
+    revealTitle.textContent = TEXT.revealNoPairTitle;
+    revealStage.classList.add('no-partner');
+    revealStage.innerHTML = `<div class="no-partner-msg">${escapeHtml(TEXT.revealNoPairMsg)}<br><span style="font-size:.95rem;color:var(--muted);font-style:italic">${escapeHtml(TEXT.revealNoPairHint)}</span></div>`;
+    revealHint.textContent = '';
+    hintsPanel.classList.add('hidden');
+    setScreen('reveal');
+    return;
+  }
+
+  let html = '<div class="content">';
+  if (u.role === 'senior') {
+    revealTitle.textContent = partners.length > 1 ? TEXT.revealSeniorTitleMulti(partners.length) : TEXT.revealSeniorTitle;
+    partners.forEach((p, idx) => {
+      const msgClass = p.message ? '' : ' empty';
+      const msgText = p.message || TEXT.revealNoMessage;
+      const fromTag = `<div class="from-tag">${escapeHtml(TEXT.revealFromTag(roleLabel(p.role)))}</div>`;
+      if (idx > 0) html += `<div class="partner-divider"></div>`;
+      html += `<div class="partner-name">${escapeHtml(p.name)}</div>`;
+      html += fromTag + `<div class="partner-message${msgClass}">${escapeHtml(msgText)}</div>`;
+      html += songCardHtml(p.song);
+    });
+  } else {
+    const partner = partners[0];
+    const msgClass = partner.message ? '' : ' empty';
+    const msgText = partner.message || TEXT.revealNoMessage;
+    const fromTag = `<div class="from-tag">${escapeHtml(TEXT.revealFromTag(roleLabel(partner.role)))}</div>`;
+    revealTitle.textContent = TEXT.revealJuniorTitle;
+    html += `<div class="partner-name" style="color:var(--muted);font-size:1.4rem;font-style:italic">${escapeHtml(TEXT.revealMysteryName)}</div>`;
+    html += fromTag + `<div class="partner-message${msgClass}">${escapeHtml(msgText)}</div>`;
+    html += songCardHtml(partner.song);
+  }
+  html += '</div><div class="beam"></div>';
+  revealStage.innerHTML = html;
+
+  if (u.role === 'junior') {
+    const senior = partners[0];
+    setHintsSeenFor(u.id, getHintsForJunior(senior, u.id).length);
+  }
+  _hintsLastSeenLen = -1;
+  if (u.role === 'senior' && partners.length > 0) {
+    if (!partners.find(p => p.id === _seniorActiveJuniorId)) {
+      _seniorActiveJuniorId = partners[0].id;
+    }
+  }
+  renderHintsPanel();
+  setScreen('reveal');
+  runScan();
+};
+
+let _hintsLastSeenLen = -1;
+let _seniorActiveJuniorId = null;
+const renderHintsPanel = () => {
+  if (!currentUserId) { hintsPanel.classList.add('hidden'); return; }
+  const me = findUserById(currentUserId);
+  if (!me) { hintsPanel.classList.add('hidden'); return; }
+  const isAuthor = me.role === 'senior';
+  const partnerIds = getPartnerIds(me.id);
+  const partners = partnerIds.map(findUserById).filter(Boolean);
+  if (partners.length === 0) { hintsPanel.classList.add('hidden'); return; }
+
+  let activeJuniorId, senior, hints;
+  if (isAuthor) {
+    if (!partners.find(p => p.id === _seniorActiveJuniorId)) {
+      _seniorActiveJuniorId = partners[0].id;
+    }
+    activeJuniorId = _seniorActiveJuniorId;
+    senior = me;
+    hints = getHintsForJunior(me, activeJuniorId);
+  } else {
+    senior = partners[0];
+    activeJuniorId = me.id;
+    hints = getHintsForJunior(senior, me.id);
+  }
+  const grew = _hintsLastSeenLen >= 0 && hints.length > _hintsLastSeenLen;
+  _hintsLastSeenLen = hints.length;
+  if (!isAuthor) setHintsSeenFor(me.id, hints.length);
+
+  const prevInput = $('hint-input');
+  const prevValue = prevInput ? prevInput.value : '';
+  const prevFocused = prevInput && document.activeElement === prevInput;
+  const prevSelStart = prevFocused ? prevInput.selectionStart : null;
+  const prevSelEnd = prevFocused ? prevInput.selectionEnd : null;
+
+  let html = '';
+  if (isAuthor && partners.length > 1) {
+    html += '<div class="hint-tabs">';
+    partners.forEach(p => {
+      const cls = p.id === activeJuniorId ? 'active' : '';
+      html += `<button type="button" class="hint-tab ${cls}" data-jid="${escapeHtml(p.id)}">${escapeHtml(p.name)}</button>`;
+    });
+    html += '</div>';
+  }
+  const titleText = isAuthor
+    ? (partners.length > 1
+        ? TEXT.hintsTitleAuthorFor((partners.find(p => p.id === activeJuniorId) || partners[0]).name)
+        : TEXT.hintsTitleAuthor)
+    : TEXT.hintsTitleViewer;
+  html += `<div class="hints-title">${escapeHtml(titleText)}</div>`;
+  if (hints.length > 0) {
+    html += '<ol class="hints-list">';
+    hints.forEach((h, i) => {
+      const flashCls = (grew && i === hints.length - 1) ? ' hint-new' : '';
+      html += `<li class="${flashCls.trim()}">${escapeHtml(h)}${isAuthor ? `<button class="hint-del" data-idx="${i}" type="button" aria-label="ลบคำใบ้">✕</button>` : ''}</li>`;
+    });
+    html += '</ol>';
+  } else {
+    html += `<div class="hints-empty">${escapeHtml(isAuthor ? TEXT.hintsEmptyAuthor : TEXT.hintsEmptyViewer)}</div>`;
+  }
+  if (isAuthor) {
+    html += `<div class="hint-compose"><input type="text" id="hint-input" maxlength="120" data-placeholder="hintsPlaceholder" placeholder="${escapeHtml(TEXT.hintsPlaceholder)}"><button class="cta" id="hint-add" type="button">${escapeHtml(TEXT.btnAddHint)}</button></div>`;
+  }
+
+  hintsPanel.innerHTML = html;
+  hintsPanel.classList.remove('hidden');
+  if (grew) {
+    const newest = hintsPanel.querySelector('.hint-new');
+    if (newest) {
+      requestAnimationFrame(() => newest.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+    }
+  }
+
+  if (isAuthor && partners.length > 1) {
+    hintsPanel.querySelectorAll('.hint-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        _seniorActiveJuniorId = btn.dataset.jid;
+        _hintsLastSeenLen = -1;
+        renderHintsPanel();
+      });
+    });
+  }
+
+  if (isAuthor) {
+    const input = $('hint-input');
+    const addBtn = $('hint-add');
+    if (prevValue) input.value = prevValue;
+    if (prevFocused) {
+      input.focus();
+      try { input.setSelectionRange(prevSelStart, prevSelEnd); } catch {}
+    }
+    const targetJuniorId = activeJuniorId;
+    const submit = async () => {
+      const text = input.value.trim();
+      if (!text) { flash(TEXT.errHintEmpty, true); return; }
+      try {
+        await txnUpdate(curr => {
+          const u = curr.users.find(x => x.id === currentUserId);
+          if (!u) throw new TxnAbort(TEXT.errNotFound);
+          if (u.role !== 'senior') throw new TxnAbort(TEXT.errNotFound);
+          const partnersNow = getPartnerIdsFrom(curr.matches, u.id);
+          if (!partnersNow.includes(targetJuniorId)) throw new TxnAbort(TEXT.errNotFound);
+          if (!u.hintsByJunior) u.hintsByJunior = {};
+          if (!Array.isArray(u.hintsByJunior[targetJuniorId])) {
+            u.hintsByJunior[targetJuniorId] = (partnersNow.length === 1 && Array.isArray(u.hints)) ? u.hints.slice() : [];
+          }
+          u.hintsByJunior[targetJuniorId] = u.hintsByJunior[targetJuniorId].concat([text]);
+          return curr;
+        });
+        input.value = '';
+      } catch (e) { flash(e.uiAbort ? e.message : TEXT.errSaveFail(e.message), true); }
+    };
+    addBtn.addEventListener('click', submit);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+
+    hintsPanel.querySelectorAll('.hint-del').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const idx = parseInt(btn.dataset.idx, 10);
+        try {
+          await txnUpdate(curr => {
+            const u = curr.users.find(x => x.id === currentUserId);
+            if (!u) throw new TxnAbort(TEXT.errNotFound);
+            if (!u.hintsByJunior) u.hintsByJunior = {};
+            if (!Array.isArray(u.hintsByJunior[targetJuniorId])) {
+              const partnersNow = getPartnerIdsFrom(curr.matches, u.id);
+              u.hintsByJunior[targetJuniorId] = (partnersNow.length === 1 && Array.isArray(u.hints)) ? u.hints.slice() : [];
+            }
+            if (idx < 0 || idx >= u.hintsByJunior[targetJuniorId].length) throw new TxnAbort(TEXT.errNotFound);
+            u.hintsByJunior[targetJuniorId].splice(idx, 1);
+            return curr;
+          });
+        } catch (e) { flash(e.uiAbort ? e.message : TEXT.errSaveFail(e.message), true); }
+      });
+    });
+  }
+};
+
+const runScan = () => {
+  if (scanRaf) cancelAnimationFrame(scanRaf);
+  const t0 = performance.now();
+  const DUR = 1800;
+  const tick = (now) => {
+    const t = Math.min(1, (now - t0) / DUR);
+    const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    revealStage.style.setProperty('--scan', (eased * 100).toFixed(2) + '%');
+    if (t < 1) scanRaf = requestAnimationFrame(tick);
+    else { revealStage.classList.add('done'); revealHint.textContent = TEXT.revealScanned; scanRaf = null; }
+  };
+  scanRaf = requestAnimationFrame(tick);
+};
+
+revealBack.addEventListener('click', () => {
+  if (scanRaf) cancelAnimationFrame(scanRaf);
+  homeName.value = '';
+  setScreen('home');
+});
+
+/* ── Admin ── */
+const adminStatus = $('admin-status');
+const adminUsers = $('admin-users');
+const statSeniors = $('stat-seniors');
+const statJuniors = $('stat-juniors');
+const statPairs = $('stat-pairs');
+const adminRandomize = $('admin-randomize');
+const adminResetMatches = $('admin-reset-matches');
+const adminResetAll = $('admin-reset-all');
+
+/* ── User PIN modal (numpad) ── */
+const pinModal = $('pin-modal');
+const pinDesc = $('pin-desc');
+const pinDisplay = $('pin-display');
+const pinGo = $('pin-go');
+const pinCancel = $('pin-cancel');
+const pinWarn = $('pin-warn');
+let _pinTargetUser = null;
+let _pinSuccessCb = null;
+let _pinCurrent = '';
+
+let _pinPrevLen = 0;
+const renderPinDisplay = () => {
+  const dots = pinDisplay.querySelectorAll('.pin-dot');
+  const len = _pinCurrent.length;
+  const justAdded = len > _pinPrevLen ? len - 1 : -1;
+  dots.forEach((d, i) => {
+    d.classList.toggle('filled', i < len);
+    d.classList.toggle('just-filled', i === justAdded);
+  });
+  pinDisplay.classList.toggle('complete', len >= 4);
+  _pinPrevLen = len;
+};
+
+const shakePinDisplay = () => {
+  pinDisplay.classList.add('shake');
+  setTimeout(() => pinDisplay.classList.remove('shake'), 400);
+};
+
+const openPinModal = (user, onSuccess) => {
+  _pinTargetUser = user;
+  _pinSuccessCb = onSuccess;
+  _pinCurrent = '';
+  pinDesc.textContent = TEXT.pinModalDesc(user.name);
+  showWarn(pinWarn, '');
+  renderPinDisplay();
+  pinModal.classList.remove('hidden');
+};
+
+const closePinModal = () => {
+  pinModal.classList.add('hidden');
+  _pinTargetUser = null;
+  _pinSuccessCb = null;
+  _pinCurrent = '';
+};
+
+const submitPin = async () => {
+  if (!_pinTargetUser) return;
+  if (!_pinCurrent) { showWarn(pinWarn, TEXT.errPinRequired, true); shakePinDisplay(); return; }
+  const h = await hashPin(_pinCurrent);
+  if (h === _pinTargetUser.pin) {
+    const cb = _pinSuccessCb;
+    closePinModal();
+    if (cb) await cb();
+  } else {
+    showWarn(pinWarn, TEXT.errPinWrong, true);
+    shakePinDisplay();
+    _pinCurrent = '';
+    setTimeout(renderPinDisplay, 400);
+  }
+};
+
+document.querySelectorAll('#pin-numpad .numpad-btn[data-digit]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (_pinCurrent.length >= 6) return;
+    _pinCurrent += btn.dataset.digit;
+    renderPinDisplay();
+  });
+});
+$('pin-clear').addEventListener('click', () => { _pinCurrent = ''; renderPinDisplay(); });
+$('pin-backspace').addEventListener('click', () => { _pinCurrent = _pinCurrent.slice(0, -1); renderPinDisplay(); });
+
+pinGo.addEventListener('click', submitPin);
+pinCancel.addEventListener('click', closePinModal);
+
+window.addEventListener('keydown', e => {
+  if (pinModal.classList.contains('hidden')) return;
+  if (/^\d$/.test(e.key)) { if (_pinCurrent.length < 6) { _pinCurrent += e.key; renderPinDisplay(); } }
+  else if (e.key === 'Backspace') { _pinCurrent = _pinCurrent.slice(0, -1); renderPinDisplay(); }
+  else if (e.key === 'Enter') submitPin();
+  else if (e.key === 'Escape') closePinModal();
+});
+
+/* ── Admin auth (Firebase Auth) ── */
+const authModal = $('auth-modal');
+const authEmail = $('auth-email');
+const authPwd = $('auth-pwd');
+const authGo = $('auth-go');
+const authCancel = $('auth-cancel');
+const authWarn = $('auth-warn');
+
+const tryEnterAdmin = () => {
+  if (isAdminAuthed()) { setScreen('admin'); return; }
+  showWarn(authWarn, '');
+  authEmail.value = '';
+  authPwd.value = '';
+  authModal.classList.remove('hidden');
+  setTimeout(() => authEmail.focus(), 80);
+};
+
+const submitAuth = async () => {
+  const email = authEmail.value.trim();
+  const pwd = authPwd.value;
+  if (!email || !pwd) { showWarn(authWarn, TEXT.errAuthWrong, true); return; }
+  showWarn(authWarn, TEXT.msgSaving);
+  try {
+    const cred = await signInWithEmailAndPassword(auth, email, pwd);
+    const adminDoc = await getDoc(doc(db, "admins", cred.user.uid));
+    if (!adminDoc.exists()) {
+      await signOut(auth);
+      showWarn(authWarn, TEXT.errAuthNotAdmin, true);
+      return;
+    }
+    _adminUser = cred.user;
+    authModal.classList.add('hidden');
+    authPwd.value = '';
+    setScreen('admin');
+  } catch (e) {
+    if (e.code === 'auth/invalid-credential' || e.code === 'auth/wrong-password' || e.code === 'auth/user-not-found' || e.code === 'auth/invalid-email') {
+      showWarn(authWarn, TEXT.errAuthWrong, true);
+    } else if (e.code === 'auth/network-request-failed') {
+      showWarn(authWarn, TEXT.errAuthNetwork, true);
+    } else {
+      showWarn(authWarn, e.message, true);
+    }
+    authPwd.value = '';
+    authPwd.focus();
+  }
+};
+
+authGo.addEventListener('click', submitAuth);
+authEmail.addEventListener('keydown', e => { if (e.key === 'Enter') authPwd.focus(); });
+authPwd.addEventListener('keydown', e => { if (e.key === 'Enter') submitAuth(); });
+authCancel.addEventListener('click', () => { authModal.classList.add('hidden'); });
+
+adminLink.addEventListener('click', () => {
+  if (currentScreen === 'admin') { setScreen('home'); return; }
+  tryEnterAdmin();
+});
+$('admin-signout').addEventListener('click', async () => {
+  try { await signOut(auth); flash(TEXT.okAdminSignedOut); } catch {}
+  setScreen('home');
+});
+
+$('admin-toggle-lock').addEventListener('click', () => {
+  const locking = !data.registrationLocked;
+  confirmModal(
+    locking ? TEXT.lockRegConfirm : TEXT.unlockRegConfirm,
+    locking ? TEXT.lockRegText : TEXT.unlockRegText,
+    async () => {
+      try {
+        await txnUpdate(curr => { curr.registrationLocked = locking; return curr; });
+        flash(locking ? TEXT.okRegLocked : TEXT.okRegUnlocked);
+      } catch (e) { flash(TEXT.errFail(e.message), true); }
+    }
+  );
+});
+
+const renderAdmin = () => {
+  const seniors = data.users.filter(u => u.role === 'senior');
+  const juniors = data.users.filter(u => u.role === 'junior');
+  animateNumber(statSeniors, seniors.length);
+  animateNumber(statJuniors, juniors.length);
+  animateNumber(statPairs, Object.keys(data.matches).length / 2);
+
+  adminStatus.textContent = isRandomized()
+    ? TEXT.adminStatusRandomized(new Date(data.randomizedAt).toLocaleString('th-TH'))
+    : TEXT.adminStatusNotRandomized;
+
+  adminUsers.innerHTML = '';
+  if (data.users.length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'user-list-empty';
+    empty.textContent = TEXT.adminEmpty;
+    adminUsers.appendChild(empty);
+  } else {
+    data.users.forEach(u => {
+      const chip = document.createElement('span');
+      chip.className = 'user-chip';
+      chip.title = TEXT.udPartnerArrow;
+      const role = document.createElement('span');
+      role.className = 'role';
+      role.textContent = roleLabel(u.role);
+      const name = document.createElement('span');
+      name.textContent = u.name;
+      const x = document.createElement('span');
+      x.className = 'x';
+      x.title = TEXT.btnDelete;
+      x.textContent = '✕';
+      x.addEventListener('click', (e) => {
+        e.stopPropagation();
+        confirmModal(TEXT.delChipConfirm(u.name), TEXT.delChipText, async () => {
+          try {
+            await txnUpdate(curr => {
+              curr.users = curr.users.filter(x => x.id !== u.id);
+              delete curr.matches[u.id];
+              for (const k of Object.keys(curr.matches)) {
+                if (curr.matches[k] === u.id) delete curr.matches[k];
+              }
+              return curr;
+            });
+          } catch (e) { flash(TEXT.errDelFail(e.message), true); }
+        });
+      });
+      chip.addEventListener('click', () => showUserDetail(u.id));
+      chip.appendChild(role);
+      chip.appendChild(name);
+      chip.appendChild(x);
+      adminUsers.appendChild(chip);
+    });
+  }
+
+  adminRandomize.textContent = isRandomized() ? TEXT.btnRerandomize : TEXT.btnRandomize;
+
+  const lockBtn = $('admin-toggle-lock');
+  lockBtn.classList.toggle('hidden', isRandomized());
+  lockBtn.textContent = data.registrationLocked ? TEXT.btnUnlockReg : TEXT.btnLockReg;
+};
+
+/* ── User detail modal (admin) ── */
+const userDetailModal = $('user-detail-modal');
+const udContent = $('ud-content');
+const udClose = $('ud-close');
+
+const renderUserBlock = (u, sectionLabel) => {
+  const msgEmpty = !u.message;
+  const msg = msgEmpty ? TEXT.udNoMessage : escapeHtml(u.message);
+  return `<div class="ud-block">
+    <div class="ud-section-label">${escapeHtml(sectionLabel)}</div>
+    <div class="ud-name">${escapeHtml(roleLabel(u.role) + u.name)}</div>
+    <div class="ud-msg${msgEmpty ? ' empty' : ''}">${msg}</div>
+    ${songCardHtml(u.song)}
+  </div>`;
+};
+
+const showUserDetail = (userId) => {
+  const u = findUserById(userId);
+  if (!u) return;
+  const partners = getPartnerIds(u.id).map(findUserById).filter(Boolean);
+
+  let html = renderUserBlock(u, TEXT.udSectionUser);
+  html += `<div class="ud-divider">↓ ${escapeHtml(TEXT.udPartnerArrow)} ↓</div>`;
+  if (!isRandomized()) {
+    html += `<div class="ud-block"><div class="ud-empty">${escapeHtml(TEXT.udNotRandomized)}</div></div>`;
+  } else if (partners.length === 0) {
+    html += `<div class="ud-block"><div class="ud-empty">${escapeHtml(TEXT.udNoPartner)}</div></div>`;
+  } else {
+    partners.forEach((p, i) => {
+      const label = partners.length > 1 ? `${TEXT.udSectionPartner} ${i + 1}` : TEXT.udSectionPartner;
+      html += renderUserBlock(p, label);
+    });
+  }
+  udContent.innerHTML = html;
+  userDetailModal.classList.remove('hidden');
+};
+
+const closeUserDetail = () => userDetailModal.classList.add('hidden');
+udClose.addEventListener('click', closeUserDetail);
+userDetailModal.addEventListener('click', (e) => { if (e.target === userDetailModal) closeUserDetail(); });
+window.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !userDetailModal.classList.contains('hidden')) closeUserDetail(); });
+
+adminRandomize.addEventListener('click', () => {
+  const seniors = data.users.filter(u => u.role === 'senior');
+  const juniors = data.users.filter(u => u.role === 'junior');
+  if (seniors.length === 0 || juniors.length === 0) { flash(TEXT.errInsufficient, true); return; }
+  const action = isRandomized() ? TEXT.btnRerandomize : TEXT.btnRandomize;
+  const cap = 2;
+  const pairable = Math.min(juniors.length, seniors.length * cap);
+  const unmatched = (juniors.length > seniors.length * cap) ? (juniors.length - seniors.length * cap) : (seniors.length > juniors.length ? (seniors.length - juniors.length) : 0);
+  let warn = '';
+  if (seniors.length !== juniors.length) {
+    warn = TEXT.randomizeWarn(seniors.length, juniors.length, unmatched);
+  }
+  confirmModal(TEXT.randomizeConfirm(action), TEXT.randomizeConfirmText(pairable, warn), async () => {
+    try {
+      await txnUpdate(curr => {
+        const sr = curr.users.filter(u => u.role === 'senior');
+        const jr = shuffle(curr.users.filter(u => u.role === 'junior'));
+        if (sr.length === 0 || jr.length === 0) throw new TxnAbort(TEXT.errInsufficient);
+        curr.matches = {};
+        const assign = {};
+        sr.forEach(s => { assign[s.id] = []; });
+        const limit = Math.min(jr.length, sr.length * cap);
+        for (let i = 0; i < limit; i++) {
+          const s = sr[i % sr.length];
+          assign[s.id].push(jr[i].id);
+        }
+        sr.forEach(s => {
+          const js = assign[s.id];
+          if (js.length === 1) curr.matches[s.id] = js[0];
+          else if (js.length > 1) curr.matches[s.id] = js;
+          js.forEach(jid => { curr.matches[jid] = s.id; });
+          const u = curr.users.find(x => x.id === s.id);
+          if (u) u.hintsByJunior = {};
+        });
+        curr.randomizedAt = Date.now();
+        return curr;
+      });
+      confetti(120);
+      flash(TEXT.okRandomized);
+    } catch (e) { flash(e.uiAbort ? e.message : TEXT.errRandomizeFail(e.message), true); }
+  });
+});
+
+adminResetMatches.addEventListener('click', () => {
+  if (!isRandomized()) { flash(TEXT.errNotRandomized, true); return; }
+  confirmModal(TEXT.resetMatchesConfirm, TEXT.resetMatchesText, async () => {
+    try {
+      await txnUpdate(curr => { curr.matches = {}; curr.randomizedAt = null; return curr; });
+      flash(TEXT.okResetMatches);
+    } catch (e) { flash(TEXT.errFail(e.message), true); }
+  });
+});
+
+adminResetAll.addEventListener('click', () => {
+  confirmModal(TEXT.resetAllConfirm, TEXT.resetAllText, async () => {
+    try {
+      await txnUpdate(() => defaultData());
+      flash(TEXT.okResetAll);
+    } catch (e) { flash(TEXT.errFail(e.message), true); }
+  });
+});
+
+/* ── Confirm modal ── */
+const confirmModalEl = $('confirm-modal');
+const confirmTitleEl = $('confirm-title');
+const confirmTextEl = $('confirm-text');
+const confirmYes = $('confirm-yes');
+const confirmNo = $('confirm-no');
+let confirmCb = null;
+const confirmModal = (title, text, cb) => {
+  confirmTitleEl.textContent = title;
+  confirmTextEl.textContent = text;
+  confirmCb = cb;
+  confirmModalEl.classList.remove('hidden');
+};
+confirmYes.addEventListener('click', () => {
+  confirmModalEl.classList.add('hidden');
+  if (confirmCb) confirmCb();
+  confirmCb = null;
+});
+confirmNo.addEventListener('click', () => {
+  confirmModalEl.classList.add('hidden');
+  confirmCb = null;
+});
+
+/* ── Flash toast ── */
+let flashTimer = null;
+const flash = (msg, isError = false) => {
+  let el = document.getElementById('flash-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'flash-toast';
+    el.style.cssText = `position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:rgba(14,26,47,.95);border:1px solid var(--gold);color:var(--gold-bright);padding:10px 22px;border-radius:999px;font-family:Mali,cursive;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,.5);backdrop-filter:blur(8px);transition:opacity .25s,transform .25s;opacity:0`;
+    document.body.appendChild(el);
+  }
+  if (isError) { el.style.borderColor = 'var(--danger)'; el.style.color = '#ffb4ad'; }
+  else { el.style.borderColor = 'var(--gold)'; el.style.color = 'var(--gold-bright)'; }
+  el.textContent = msg;
+  requestAnimationFrame(() => { el.style.opacity = '1'; el.style.transform = 'translate(-50%, -8px)'; });
+  clearTimeout(flashTimer);
+  flashTimer = setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateX(-50%)'; }, 2400);
+};
+
+/* ── Easter egg: click title for confetti ── */
+document.querySelectorAll('header.site h1').forEach(h => {
+  h.style.cursor = 'pointer';
+  h.style.userSelect = 'none';
+  let clickCount = 0;
+  let resetTimer = null;
+  h.addEventListener('click', () => {
+    clickCount++;
+    h.classList.remove('pressed');
+    void h.offsetWidth;
+    h.classList.add('pressed');
+    setTimeout(() => h.classList.remove('pressed'), 600);
+    clearTimeout(resetTimer);
+    resetTimer = setTimeout(() => clickCount = 0, 1500);
+    if (clickCount >= 3) {
+      confetti(90);
+      clickCount = 0;
+    }
+  });
+});
+
+/* ── Init ── */
+setScreen('home');
+</script>
+</body>
+</html>
