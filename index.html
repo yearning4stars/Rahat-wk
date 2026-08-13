@@ -662,6 +662,7 @@
       <div id="admin-users" class="user-list"></div>
       <div class="actions" style="justify-content:flex-start">
         <button id="admin-randomize" class="cta">สุ่มจับคู่</button>
+<button id="admin-batch-pin" class="ghost" type="button">ตรวจสอบ PIN หลายรายการ</button>
         <button id="admin-toggle-lock" class="ghost">ปิดการลงทะเบียน</button>
         <button id="admin-reset-matches" class="ghost" data-text="btnResetMatches">ล้างผลสุ่ม</button>
         <button id="admin-reset-all" class="danger" data-text="btnResetAll">ล้างข้อมูลทั้งหมด</button>
@@ -2513,6 +2514,177 @@ const renderAdmin = () => {
   lockBtn.classList.toggle('hidden', isRandomized());
   lockBtn.textContent = data.registrationLocked ? TEXT.btnUnlockReg : TEXT.btnLockReg;
 };
+
+
+<!-- Batch PIN checker -->
+<div id="batch-pin-modal" class="modal-bg hidden">
+  <div class="modal" style="max-width:620px;text-align:left">
+    <h2 style="margin-top:0">ตรวจสอบ PIN หลายรายการ</h2>
+    <p style="color:var(--muted);line-height:1.6">
+      ใส่ PIN หลายรายการ โดยคั่นแต่ละ PIN ด้วยการขึ้นบรรทัดใหม่
+    </p>
+
+    <div class="input-group">
+      <label for="batch-pin-input">PIN ที่ต้องการตรวจ</label>
+      <textarea id="batch-pin-input" rows="9"
+        placeholder="1234&#10;2580&#10;4567&#10;9999"
+        style="font-family:monospace;letter-spacing:.08em"></textarea>
+    </div>
+
+    <div class="input-group">
+      <label>เลือกผู้ใช้ที่จะตรวจ</label>
+      <div id="batch-pin-users"
+        style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;max-height:220px;overflow:auto"></div>
+    </div>
+
+    <div id="batch-pin-result" class="warning hidden" style="white-space:pre-wrap"></div>
+
+    <div class="row" style="justify-content:flex-end;margin-top:16px">
+      <button id="batch-pin-check">ตรวจสอบทั้งหมด</button>
+      <button class="ghost" id="batch-pin-close">ปิด</button>
+    </div>
+  </div>
+</div>
+
+
+const adminBatchPinBtn = $('admin-batch-pin');
+adminBatchPinBtn?.addEventListener('click', openBatchPinChecker);
+
+/* ── Batch PIN checker (admin) ── */
+const batchPinModal = $('batch-pin-modal');
+const batchPinInput = $('batch-pin-input');
+const batchPinUsers = $('batch-pin-users');
+const batchPinResult = $('batch-pin-result');
+const batchPinCheck = $('batch-pin-check');
+const batchPinClose = $('batch-pin-close');
+
+const openBatchPinChecker = () => {
+  batchPinInput.value = '';
+  batchPinResult.classList.add('hidden');
+  batchPinResult.textContent = '';
+  batchPinUsers.innerHTML = '';
+
+  data.users.forEach(u => {
+    const label = document.createElement('label');
+    label.style.cssText =
+      'display:flex;align-items:center;gap:8px;padding:8px 10px;' +
+      'border:1px solid var(--border,rgba(255,255,255,.12));' +
+      'border-radius:10px;cursor:pointer';
+
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.value = u.id;
+    cb.checked = true;
+
+    const span = document.createElement('span');
+    span.textContent = `${roleLabel(u.role)}${u.name}`;
+
+    label.appendChild(cb);
+    label.appendChild(span);
+    batchPinUsers.appendChild(label);
+  });
+
+  batchPinModal.classList.remove('hidden');
+};
+
+const closeBatchPinChecker = () => {
+  batchPinModal.classList.add('hidden');
+};
+
+const showBatchPinResult = (html) => {
+  batchPinResult.innerHTML = html;
+  batchPinResult.classList.remove('hidden');
+};
+
+batchPinCheck.addEventListener('click', async () => {
+  const pins = [...new Set(
+    batchPinInput.value
+      .split(/\r?\n|,/)
+      .map(x => x.trim())
+      .filter(Boolean)
+  )];
+
+  const selectedIds = [...batchPinUsers.querySelectorAll('input[type="checkbox"]:checked')]
+    .map(x => x.value);
+
+  if (!pins.length) {
+    showBatchPinResult('<strong>กรุณาใส่ PIN อย่างน้อย 1 รายการ</strong>');
+    return;
+  }
+
+  if (!selectedIds.length) {
+    showBatchPinResult('<strong>กรุณาเลือกผู้ใช้อย่างน้อย 1 คน</strong>');
+    return;
+  }
+
+  const invalid = pins.filter(pin => !/^\d{4,6}$/.test(pin));
+  if (invalid.length) {
+    showBatchPinResult(
+      `<strong>มี PIN ที่ไม่ถูกต้อง ${invalid.length} รายการ</strong><br>` +
+      `PIN ต้องเป็นตัวเลข 4-6 หลัก`
+    );
+    return;
+  }
+
+  batchPinCheck.disabled = true;
+  batchPinCheck.textContent = 'กำลังตรวจสอบ...';
+
+  try {
+    // Hash each candidate only once.
+    const hashes = await Promise.all(pins.map(async pin => [pin, await hashPin(pin)]));
+    const hashMap = new Map(hashes);
+
+    const results = selectedIds.map(id => {
+      const u = findUserById(id);
+      if (!u) return null;
+
+      // Only compare against the stored hash. The actual stored PIN is never read.
+      const matches = [];
+      for (const [pin, hash] of hashMap.entries()) {
+        if (u.pin && hash === u.pin) matches.push(pin);
+      }
+
+      return { u, matches };
+    }).filter(Boolean);
+
+    let html = '<strong>ผลการตรวจสอบ</strong>';
+
+    results.forEach(({u, matches}) => {
+      html += `<div style="margin-top:12px;padding:10px;border-radius:10px;background:rgba(255,255,255,.05)">`;
+      html += `<strong>${escapeHtml(roleLabel(u.role) + u.name)}</strong><br>`;
+
+      if (matches.length) {
+        html += `<span style="display:inline-block;margin-top:5px">PIN ที่ตรงกัน: `;
+        html += matches.map(pin =>
+          `<code style="font-size:1rem;margin-left:5px">${escapeHtml(pin)}</code>`
+        ).join('');
+        html += `</span>`;
+      } else {
+        html += `<span style="display:inline-block;margin-top:5px">ไม่พบ PIN ที่ตรงกัน</span>`;
+      }
+
+      html += `</div>`;
+    });
+
+    showBatchPinResult(html);
+  } catch (e) {
+    showBatchPinResult(`<strong>ตรวจสอบไม่สำเร็จ</strong><br>${escapeHtml(e.message || String(e))}`);
+  } finally {
+    batchPinCheck.disabled = false;
+    batchPinCheck.textContent = 'ตรวจสอบทั้งหมด';
+  }
+});
+
+batchPinClose.addEventListener('click', closeBatchPinChecker);
+batchPinModal.addEventListener('click', e => {
+  if (e.target === batchPinModal) closeBatchPinChecker();
+});
+
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !batchPinModal.classList.contains('hidden')) {
+    closeBatchPinChecker();
+  }
+});
 
 /* ── User detail modal (admin) ── */
 const userDetailModal = $('user-detail-modal');
